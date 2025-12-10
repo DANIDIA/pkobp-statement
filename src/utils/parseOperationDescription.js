@@ -1,4 +1,3 @@
-import { stringify } from "txml/dist/tXml.js";
 import { OperationType } from "../enums/operationType.js";
 import { OperationDescription } from "../types/operationDescription.js";
 import { Atm } from "../types/atm.js";
