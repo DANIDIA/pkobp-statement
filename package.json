@@ -1,0 +1,24 @@
+{
+  "name": "pkobp-statement",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "Wiktor Czernik",
+  "type": "module",
+  "main": "./src/index.js",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "imports": {
+    "#src/*": "./src/*",
+    "#utils/*": "./src/utils/*",
+    "#types/*": "./src/types/*",
+    "#enums/*": "./src/enums/*"
+  },
+  "scripts": {
+    "test": "node --test"
+  },
+  "dependencies": {
+    "txml": "^5.2.1"
+  }
+}

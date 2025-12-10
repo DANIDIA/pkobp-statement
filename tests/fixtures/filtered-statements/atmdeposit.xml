@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<account-history>
+    <search>
+        <account>01234567890123456789012345</account>
+        <date since="2025-01-01" to="2025-12-31"/>
+        <filtering>Wszystkie</filtering>
+    </search>
+    <operations>
+        <operation>
+            <order-date>2025-09-01</order-date>
+            <exec-date>2025-09-01</exec-date>
+            <type>Wpłata gotówki we wpłatomacie</type>
+            <description>PKO BP 12345678S1LD1405W200H 7140 Lokalizacja : Miasto : LODZ Kraj : POLSKA Data wykonania operacji : 2025-09-01 Oryginalna kwota operacji : 1000,00 PLN Numer karty : 123123******1234</description>
+            <amount curr="PLN">+1000.00</amount>
+            <ending-balance curr="PLN">+1000.00</ending-balance>
+        </operation>
+    </operations>
+</account-history>
