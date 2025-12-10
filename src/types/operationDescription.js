@@ -1,4 +1,4 @@
-import { Atm } from "./Atm.js"
+import { Atm } from "./atm.js"
 import { Receiver } from "./receiver.js"
 import { Sender } from "./sender.js"
 import { OperationLocation } from "./operationLocation.js"

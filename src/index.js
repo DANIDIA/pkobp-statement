@@ -1,7 +1,7 @@
 import { Currency } from "#enums/currency.js";
+import { Atm } from "#types/atm.js";
 import { OperationType } from "#enums/operationType.js";
 import { AccountStatement } from "#types/accountStatement.js";
-import { Atm } from "#types/Atm.js";
 import { LoanTransactionDescription } from "#types/loanTransactionDescription.js";
 import { Operation } from "#types/operation.js";
 import { OperationDescription } from "#types/operationDescription.js";

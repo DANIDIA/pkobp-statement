@@ -1,7 +1,7 @@
 import { stringify } from "txml/dist/tXml.js";
 import { OperationType } from "../enums/operationType.js";
 import { OperationDescription } from "../types/operationDescription.js";
-import { Atm } from "../types/Atm.js";
+import { Atm } from "../types/atm.js";
 import { Sender } from "../types/sender.js";
 import { Receiver } from "../types/receiver.js";
 import { OperationLocation } from "../types/operationLocation.js";
