@@ -5,50 +5,86 @@
 export const OperationType = Object.freeze({
     /** For invalid objects or masking */
     None: 0,
+
+    // --- Transfers (outgoing / incoming) ---
     /** 'Przelew z rachunku' */
-    TransferFromAccount: 1 << 0,
+    TransferOutcoming: 1 << 0,
     /** 'Przelew na konto' */
-    TransferToAccount: 1 << 1,
-    /** 'Płatność kartą' */
-    CardPayment: 1 << 2,
-    /** 'Obciążenie' */
-    Charge: 1 << 3,
-    /** 'Zakup w terminalu - kod mobilny' */
-    TerminalPurchaseBlik: 1 << 4,
-    /** 'Przelew na telefon przychodz. wew.' */
-    IncomingPhoneTransferInternal: 1 << 5,
-    /** 'Przelew na telefon przychodz. zew.' */
-    IncomingPhoneTransferExternal: 1 << 6,
-    /** 'Płatność web - kod mobilny' */
-    WebPaymentBlik: 1 << 7,
-    /** 'Naliczenie odsetek' */
-    InterestCredited: 1 << 8,
-    /** 'Wypłata w bankomacie - kod mobilny' */
-    AtmWithdrawalBlik: 1 << 9,
-    /** 'Spłata kredytu' */
-    LoanRepayment: 1 << 10,
-    /** 'Wpłata BLIKIEM we wpłatomacie' */
-    AtmDepositBlik: 1 << 11,
-    /** 'Autooszczędzanie' */
-    AutoSavings: 1 << 12,
-    /** 'WYMIANA W KANTORZE - UZNANIE' */
-    CurrencyExchange: 1 << 13,
-    /** 'Zwrot płatności kartą' */
-    CardPaymentRefund: 1 << 14,
-    /** 'Opłata' */
-    Fee: 1 << 15,
-    /** 'Wpłata gotówkowa w kasie' */
-    CashDepositTeller: 1 << 16,
-    /** 'Wpłata gotówki we wpłatomacie' */
-    AtmDeposit: 1 << 17,
-    /** 'BLIK_CONTACTLESS_PAYMENT_RETURN' */
-    BlikContactlessPaymentReturn: 1 << 18,
+    TransferIncoming: 1 << 1,
     /** 'Przelew natychmiastowy' */
-    InstantTransferToAccount: 1 << 19,
+    InstantTransferOutcoming: 1 << 2,
+    // Found 10.12.2025
+    /** 'Przelew Natychmiastowy na konto' */
+    InstantTransferIncoming: 1 << 3,
+    /** 'Przelew Paybynet' */
+    PaybynetTransferOutcoming: 1 << 4,
+    /** 'Przelew Paybynet na konto' */
+    PaybynetTransferIncoming: 1 << 5,
+    // TODO: Fix parsing!
+    /** 'Przelew zagraniczny i walutowy' */
+    ForeignCurrencyTransferIncoming: 1 << 6,
+
+    // --- Phone transfers ---
+    /** 'Przelew na telefon przychodz. wew.' */
+    IncomingPhoneTransferInternal: 1 << 7,
+    /** 'Przelew na telefon przychodz. zew.' */
+    IncomingPhoneTransferExternal: 1 << 8,
+
+    // --- Card & web payments / BLIK ---
+    /** 'Płatność kartą' */
+    CardPayment: 1 << 9,
+    /** 'Zwrot płatności kartą' */
+    CardPaymentRefund: 1 << 10,
+    /** 'Opłata za użytkowanie karty' */
+    CardUsageFee: 1 << 11,
+    /** 'Płatność web - kod mobilny' */
+    WebPaymentBlik: 1 << 12,
+    /** 'Zakup w terminalu - kod mobilny' */
+    TerminalPurchaseBlik: 1 << 13,
+    /** 'Anulowanie zakupu w terminalu - kod mobilny' */
+    TerminalPurchaseCancelBlik: 1 << 14,
+    /** 'BLIK_CONTACTLESS_PAYMENT_RETURN' */
+    BlikContactlessPaymentReturn: 1 << 15,
     /** 'Zwrot w terminalu' */
-    TerminalRefund: 1 << 20,
+    TerminalRefund: 1 << 16,
+
+    // --- ATM & Cash ---
+    /** 'Wypłata z bankomatu' */
+    AtmWithdrawal: 1 << 17,
+    /** 'Wypłata w bankomacie - kod mobilny' */
+    AtmWithdrawalBlik: 1 << 18,
+    /** 'Wpłata gotówki we wpłatomacie' */
+    AtmDeposit: 1 << 19,
+    /** 'Wpłata BLIKIEM we wpłatomacie' */
+    AtmDepositBlik: 1 << 20,
+    /** 'Wpłata gotówkowa w kasie' */
+    CashRegisterDeposit: 1 << 21,
+    /** 'Wypłata gotówkowa z kasy' */
+    CashRegisterWithdrawal: 1 << 22,
+
+    // --- Loans, savings, interest ---
+    /** 'Spłata kredytu' */
+    LoanRepayment: 1 << 23,
+    /** 'Autooszczędzanie' */
+    AutoSavings: 1 << 24,
+    /** 'Naliczenie odsetek' */
+    InterestCrediting: 1 << 25,
+    /** 'Podatek od odsetek' */
+    InterestTax: 1 << 26,
     /** 'Uznanie */
-    Crediting: 1 << 21
+    Crediting: 1 << 27,
+
+    // --- Currency exchange ---
+    /** 'WYMIANA W KANTORZE - UZNANIE' */
+    CurrencyExchangeCredit: 1 << 28,
+    /** 'WYMIANA W KANTORZE - OBCIĄŻENIE' */
+    CurrencyExchangeCharge: 1 << 29,
+
+    // --- Fees & charges ---
+    /** 'Obciążenie' */
+    Charge: 1 << 30,
+    /** 'Opłata' */
+    Fee: 1 << 31,
 })
 
 /**
@@ -60,9 +96,9 @@ export function parseOperationType(text)
     switch (text) {
 
         case "Przelew z rachunku":
-            return OperationType.TransferFromAccount;
+            return OperationType.TransferOutcoming;
         case "Przelew na konto":
-            return OperationType.TransferToAccount;
+            return OperationType.TransferIncoming;
         case "Płatność kartą":
             return OperationType.CardPayment;
         case "Obciążenie":
@@ -76,7 +112,7 @@ export function parseOperationType(text)
         case "Płatność web - kod mobilny":
             return OperationType.WebPaymentBlik;
         case "Naliczenie odsetek":
-            return OperationType.InterestCredited;
+            return OperationType.InterestCrediting;
         case "Wypłata w bankomacie - kod mobilny":
             return OperationType.AtmWithdrawalBlik;
         case "Spłata kredytu":
@@ -86,23 +122,44 @@ export function parseOperationType(text)
         case "Autooszczędzanie":
             return OperationType.AutoSavings;
         case "WYMIANA W KANTORZE - UZNANIE":
-            return OperationType.CurrencyExchange;
+            return OperationType.CurrencyExchangeCredit;
         case "Zwrot płatności kartą":
             return OperationType.CardPaymentRefund;
         case "Opłata":
             return OperationType.Fee;
         case "Wpłata gotówkowa w kasie":
-            return OperationType.CashDepositTeller;
+            return OperationType.CashRegisterDeposit;
         case "Wpłata gotówki we wpłatomacie":
             return OperationType.AtmDeposit;
         case "BLIK_CONTACTLESS_PAYMENT_RETURN":
             return OperationType.BlikContactlessPaymentReturn;
         case "Przelew natychmiastowy":
-            return OperationType.InstantTransferToAccount;
+            return OperationType.InstantTransferOutcoming;
         case "Zwrot w terminalu":
             return OperationType.TerminalRefund;
         case "Uznanie":
             return OperationType.Crediting;
+        // found 10.12.2025
+        case "Przelew Natychmiastowy na konto":
+            return OperationType.InstantTransferIncoming;
+        case "Wypłata gotówkowa z kasy":
+            return OperationType.CashRegisterWithdrawal;
+        case "Wypłata z bankomatu":
+            return OperationType.AtmWithdrawal;
+        case "Anulowanie zakupu w terminalu - kod mobilny":
+            return OperationType.TerminalPurchaseCancelBlik;
+        case "Przelew zagraniczny i walutowy":
+            return OperationType.ForeignCurrencyTransferIncoming;
+        case "Opłata za użytkowanie karty":
+            return OperationType.CardUsageFee;
+        case "WYMIANA W KANTORZE - OBCIĄŻENIE":
+            return OperationType.CurrencyExchangeCharge;
+        case "Przelew Paybynet":
+            return OperationType.PaybynetTransferOutcoming;
+        case "Przelew Paybynet na konto":
+            return OperationType.PaybynetTransferIncoming;
+        case "Podatek od odsetek":
+            return OperationType.InterestTax;
 
         case "":
         case null:

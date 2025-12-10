@@ -39,6 +39,13 @@ const keyNames = {
  */
 export default function parseOperationDescription(raw, opType)
 {
+    if (opType == OperationType.Crediting)
+    {
+        return new OperationDescription(raw, null, null, null, null, null,
+            null, raw, raw, null, null, null, null, null
+        )
+    }
+
     let sepUseSpace = true
     // because "KAPITAŁ:", not "KAPITAŁ :"
     if (opType == OperationType.LoanRepayment)
@@ -137,7 +144,7 @@ export default function parseOperationDescription(raw, opType)
     if (data.has(keyNames.atmName))
         atmName = data.get(keyNames.atmName)
     if (opType == OperationType.AtmDeposit || opType == OperationType.AtmDepositBlik
-        || opType == OperationType.AtmWithdrawalBlik
+        || opType == OperationType.AtmWithdrawalBlik || opType == OperationType.AtmWithdrawal
         )
         if (data.has(null))
         {        
