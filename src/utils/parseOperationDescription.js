@@ -13,7 +13,7 @@ const keyNames = {
     originalAmount: "Oryginalna kwota operacji",
     executionDate: "Data wykonania operacji",
     atmName: "Bankomat",
-    identifier: "&apos;Operacja",
+    identifier: "'Operacja",
     referenceNumber: "Numer referencyjny",
     clientsReferenceIdentifier: "Referencje własne zleceniodawcy",
     senderName: "Nazwa nadawcy",

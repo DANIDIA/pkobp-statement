@@ -9,7 +9,7 @@ export class Sender
         /** @type {string | null} */
         this.name = name
         /** @type {string | null} */
-        this.account = accountNumber
+        this.accountNumber = accountNumber
         /** @type {string | null} */
         this.address = address
     }

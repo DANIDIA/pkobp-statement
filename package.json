@@ -19,6 +19,7 @@
     "test": "node --test"
   },
   "dependencies": {
+    "html-entities": "^2.6.0",
     "txml": "^5.2.1"
   }
 }

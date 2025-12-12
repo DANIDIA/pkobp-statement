@@ -2,6 +2,7 @@ import * as tXml from "txml";
 import { Operation } from "../types/operation.js";
 import { RawOperation } from "../types/rawOperation.js";
 import { AccountStatement } from "../types/accountStatement.js";
+import { decode } from 'html-entities';
 
 /**
  * @param {string} data
@@ -39,13 +40,13 @@ export default async function parseStatementXml(data)
         const amountTag = childTags.find((node) => node.tagName == "amount")
         const endingBalanceTag = childTags.find((node) => node.tagName == "ending-balance")
         
-        const orderDate = orderDateTag.children[0]
-        const execDate = execDateTag.children[0]
-        const type = typeTag.children[0]
-        const description = descriptionTag.children[0]
-        const amount = amountTag.children[0]
-        const amountCurrency = amountTag.attributes.curr
-        const endingBalance = endingBalanceTag.children[0]
+        const orderDate = decode(orderDateTag.children[0], {level: 'xml'})
+        const execDate = decode(execDateTag.children[0], {level: 'xml'})
+        const type = decode(typeTag.children[0], {level: 'xml'})
+        const description = decode(descriptionTag.children[0], {level: 'xml'})
+        const amount = decode(amountTag.children[0], {level: 'xml'})
+        const amountCurrency = decode(amountTag.attributes.curr, {level: 'xml'})
+        const endingBalance = decode(endingBalanceTag.children[0], {level: 'xml'})
 
         const rawOperation = Object.assign(new RawOperation(), {
             orderDate: orderDate,
