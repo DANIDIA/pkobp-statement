@@ -14,11 +14,11 @@ import parseStatementXml from "#src/utils/statement/parseStatementXml.js";
 import readStatementAsync from "#src/utils/statement/readStatementAsync.js";
 
 // Exporting types
-export { 
+export {
     AccountStatement, Atm, LoanTransactionDescription, Transaction,
     TransactionDescription, TransactionLocation, RawTransaction,
-    Receiver, Sender     
- }
+    Receiver, Sender
+}
 // Utils
 export {
     parseTransactionDescription, parseStatementXml, readStatementAsync

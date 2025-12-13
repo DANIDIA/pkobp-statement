@@ -1,5 +1,4 @@
-export default class Sender
-{
+export default class Sender {
     /**
      * @param {string | null} name 
      * @param {string | null} accountNumber 
@@ -13,7 +12,7 @@ export default class Sender
         /** @type {string | null} */
         this.address = address
     }
-    
+
     hasName() { return this.name != null }
     hasAccountNumber() { return this.accountNumber != null }
     hasAddress() { return this.address != null }

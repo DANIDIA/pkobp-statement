@@ -1,5 +1,4 @@
-export default class RawTransaction
-{
+export default class RawTransaction {
     /**
      * @param {string} orderDate 
      * @param {string} execDate 

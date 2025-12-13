@@ -8,10 +8,9 @@ import { parseTransaction } from "#src/utils/transaction/parseTransaction.js";
 /**
  * @param {string} data
  */
-export default async function parseStatementXml(data)
-{
+export default async function parseStatementXml(data) {
     const parsed = tXml.parse(data)
-    
+
     const historyTag = parsed[1]
 
     const searchTag = historyTag.children[0]
@@ -29,9 +28,8 @@ export default async function parseStatementXml(data)
 
     /** @type {import("txml/txml").tNode} */
     const allTrxsTag = historyTag.children[1]
-    for(const trxTag of allTrxsTag.children)
-    {
-    /** @type {Array<import("txml/txml").tNode>} */
+    for (const trxTag of allTrxsTag.children) {
+        /** @type {Array<import("txml/txml").tNode>} */
         const childTags = trxTag.children
 
         const orderDateTag = childTags.find((node) => node.tagName == "order-date")
@@ -40,14 +38,14 @@ export default async function parseStatementXml(data)
         const descriptionTag = childTags.find((node) => node.tagName == "description")
         const amountTag = childTags.find((node) => node.tagName == "amount")
         const endingBalanceTag = childTags.find((node) => node.tagName == "ending-balance")
-        
-        const orderDate = decode(orderDateTag.children[0], {level: 'xml'})
-        const execDate = decode(execDateTag.children[0], {level: 'xml'})
-        const type = decode(typeTag.children[0], {level: 'xml'})
-        const description = decode(descriptionTag.children[0], {level: 'xml'})
-        const amount = decode(amountTag.children[0], {level: 'xml'})
-        const amountCurrency = decode(amountTag.attributes.curr, {level: 'xml'})
-        const endingBalance = decode(endingBalanceTag.children[0], {level: 'xml'})
+
+        const orderDate = decode(orderDateTag.children[0], { level: 'xml' })
+        const execDate = decode(execDateTag.children[0], { level: 'xml' })
+        const type = decode(typeTag.children[0], { level: 'xml' })
+        const description = decode(descriptionTag.children[0], { level: 'xml' })
+        const amount = decode(amountTag.children[0], { level: 'xml' })
+        const amountCurrency = decode(amountTag.attributes.curr, { level: 'xml' })
+        const endingBalance = decode(endingBalanceTag.children[0], { level: 'xml' })
 
         const rawTransaction = Object.assign(new RawTransaction(), {
             orderDate: orderDate,

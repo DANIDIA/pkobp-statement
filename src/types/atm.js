@@ -1,5 +1,4 @@
-export default class Atm 
-{
+export default class Atm {
     /**
      * @param {string | null} id 
      * @param {string | null} name 
@@ -10,7 +9,7 @@ export default class Atm
         /** @type {string | null} */
         this.name = name
     }
-    
+
     hasId() { return this.id != null }
     hasName() { return this.name != null }
 }

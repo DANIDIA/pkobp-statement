@@ -1,7 +1,6 @@
 import Transaction from "./transaction.js";
 
-export default class AccountStatement 
-{
+export default class AccountStatement {
     /**
      * @param {string} accountNumber 
      * @param {Date} sinceDate 

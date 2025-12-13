@@ -2,8 +2,7 @@ import { TransactionType } from "#enums/transactionType.js";
 import { CurrencyType } from "#enums/currencyType.js";
 import TransactionDescription from "./transactionDescription.js";
 
-export default class Transaction
-{
+export default class Transaction {
     /**
      * @param {Date} orderDate 
      * @param {Date} execDate 

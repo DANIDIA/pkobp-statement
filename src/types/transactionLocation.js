@@ -1,5 +1,4 @@
-export default class TransactionLocation
-{
+export default class TransactionLocation {
     /**
      * @param {string | null} country 
      * @param {string | null} city 

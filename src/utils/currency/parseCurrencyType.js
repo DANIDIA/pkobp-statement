@@ -4,8 +4,7 @@ import { CurrencyType } from "#src/enums/currencyType.js";
  * @param {string} text
  * @returns {CurrencyType}
  */
-export default function parseCurrencyType(text)
-{
+export default function parseCurrencyType(text) {
     switch (text) {
 
         case "PLN":

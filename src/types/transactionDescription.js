@@ -4,8 +4,7 @@ import Sender from "./sender.js"
 import TransactionLocation from "./transactionLocation.js"
 import LoanTransactionDescription from "./loanTransactionDescription.js"
 
-export default class TransactionDescription
-{
+export default class TransactionDescription {
     /**
      * @param {string} raw 
      * @param {string | null} title 
@@ -29,33 +28,32 @@ export default class TransactionDescription
         /** @type {string} */
         this.raw = raw
         /** @type {string | null} */
-        this.title = title 
+        this.title = title
         /** @type {string | null} */
-        this.phoneNumber = phoneNumber 
+        this.phoneNumber = phoneNumber
         /** @type {string | null} */
-        this.cardNumber = cardNumber 
+        this.cardNumber = cardNumber
         /** @type {string | null} */
-        this.originalAmount = originalAmount 
+        this.originalAmount = originalAmount
         /** @type {Date | null} */
-        this.executionDate = executionDate 
+        this.executionDate = executionDate
         /** @type {Atm | null} */
-        this.atm = atm 
+        this.atm = atm
         /** @type {string | null} */
-        this.identifier = identifier 
+        this.identifier = identifier
         /** @type {string | null} */
-        this.referenceNumber = referenceNumber 
+        this.referenceNumber = referenceNumber
         /** @type {string | null} */
-        this.clientsReferenceIdentifier = clientsReferenceIdentifier 
+        this.clientsReferenceIdentifier = clientsReferenceIdentifier
         /** @type {Sender | null} */
-        this.sender = sender 
+        this.sender = sender
         /** @type {Receiver | null} */
-        this.receiver = receiver 
+        this.receiver = receiver
         /** @type {TransactionLocation | null} */
-        this.location = location 
+        this.location = location
         /** @type {LoanTransactionDescription | null} */
-        this.loanTransaction = loanTransaction 
+        this.loanTransaction = loanTransaction
     }
-
     hasTitle() { return this.title != null }
     hasPhoneNumber() { return this.phoneNumber != null }
     hasCardNumber() { return this.cardNumber != null }

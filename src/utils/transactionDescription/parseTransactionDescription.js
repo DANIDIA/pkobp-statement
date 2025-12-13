@@ -37,10 +37,8 @@ const keyNames = {
  * @param {TransactionType} opType 
  * @returns {TransactionDescription | null}
  */
-export default function parseTransactionDescription(raw, opType)
-{
-    if (opType == TransactionType.Crediting)
-    {
+export default function parseTransactionDescription(raw, opType) {
+    if (opType == TransactionType.Crediting) {
         return new TransactionDescription(raw, null, null, null, null, null,
             null, raw, raw, null, null, null, null, null
         )
@@ -50,12 +48,11 @@ export default function parseTransactionDescription(raw, opType)
     // because "KAPITAŁ:", not "KAPITAŁ :"
     if (opType == TransactionType.LoanRepayment)
         sepUseSpace = false
-    
+
     const sepLen = sepUseSpace ? 2 : 1
 
-    let foundKeys = [ ]
-    for (const keyName of Object.values(keyNames))
-    {
+    let foundKeys = []
+    for (const keyName of Object.values(keyNames)) {
         // build keyname like "Bankomat :"
         let lookKeyName = keyName
         if (sepUseSpace)
@@ -64,40 +61,37 @@ export default function parseTransactionDescription(raw, opType)
 
         const index = raw.indexOf(lookKeyName)
 
-        if (index != -1)
-        {
+        if (index != -1) {
             foundKeys.push([index, keyName])
         }
     }
 
-    if (foundKeys.length == 0){
+    if (foundKeys.length == 0) {
         return new TransactionDescription(raw, null,
-            null,null,null, null,null,null,null,null,null,null,null,
+            null, null, null, null, null, null, null, null, null, null, null,
             null
         )
     }
 
-    foundKeys = foundKeys.sort(function(a, b) {
+    foundKeys = foundKeys.sort(function (a, b) {
         return a[0] - b[0];
     });
 
     let data = new Map()
     const firstKey = foundKeys.at(0)
 
-    if (firstKey[0] > 0)
-    {
+    if (firstKey[0] > 0) {
         data.set(null, raw.substring(0, firstKey[0]))
     }
-    for (let i = 0; i < foundKeys.length - 1; i++)
-    {
-        const [ keyIndex, keyName ] = foundKeys[i]
+    for (let i = 0; i < foundKeys.length - 1; i++) {
+        const [keyIndex, keyName] = foundKeys[i]
         const startIndex = keyIndex + keyName.length + sepLen
         const endIndex = foundKeys[i + 1][0]
         const value = raw.substring(startIndex, endIndex).trim()
         data.set(keyName, value)
     }
-    if (foundKeys.length > 0){
-        const [ lastKeyIndex, lastKeyName ] = foundKeys[foundKeys.length - 1]
+    if (foundKeys.length > 0) {
+        const [lastKeyIndex, lastKeyName] = foundKeys[foundKeys.length - 1]
         const lastStartIndex = lastKeyIndex + lastKeyName.length + sepLen
         const lastValue = raw.substring(lastStartIndex).trim()
         data.set(lastKeyName, lastValue)
@@ -145,9 +139,8 @@ export default function parseTransactionDescription(raw, opType)
         atmName = data.get(keyNames.atmName)
     if (opType == TransactionType.AtmDeposit || opType == TransactionType.AtmDepositBlik
         || opType == TransactionType.AtmWithdrawalBlik || opType == TransactionType.AtmWithdrawal
-        )
-        if (data.has(null))
-        {        
+    )
+        if (data.has(null)) {
             atmId = data.get(null)
         }
 
@@ -159,8 +152,8 @@ export default function parseTransactionDescription(raw, opType)
         opType == TransactionType.CardPayment ||
         opType == TransactionType.CardPaymentRefund ||
         opType == TransactionType.TerminalPurchaseBlik ||
-        opType == TransactionType.TerminalRefund ) {
-        if (data.has(null)){
+        opType == TransactionType.TerminalRefund) {
+        if (data.has(null)) {
             identifier = data.get(null)
         }
     }
@@ -182,7 +175,7 @@ export default function parseTransactionDescription(raw, opType)
         senderAddress = data.get(keyNames.senderAddress)
     if (data.has(keyNames.senderAccountNumber))
         senderAccountNumber = data.get(keyNames.senderAccountNumber)
-    
+
     // receiver
     if (data.has(keyNames.receiverName))
         receiverName = data.get(keyNames.receiverName)
@@ -197,15 +190,14 @@ export default function parseTransactionDescription(raw, opType)
         locationCity = data.get(keyNames.locationCity)
     if (data.has(keyNames.locationCountry))
         locationCountry = data.get(keyNames.locationCountry)
-    
+
     if (data.has(keyNames.loanCapitalizedInterest))
         loanCapitalizedInterest = parseFloat(data.get(keyNames.loanCapitalizedInterest))
     if (data.has(keyNames.loanInterest))
         loanInterest = parseFloat(data.get(keyNames.loanInterest))
     if (data.has(keyNames.loanPrincipal))
         loanPrincipal = parseFloat(data.get(keyNames.loanPrincipal))
-    if (data.has(keyNames.loanPenaltyInterest))
-    {
+    if (data.has(keyNames.loanPenaltyInterest)) {
         let splitted = data.get(keyNames.loanPenaltyInterest).split(" ")
         loanPenaltyInterest = parseFloat(splitted[0])
         loanId = splitted[1]

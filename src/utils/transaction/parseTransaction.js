@@ -8,7 +8,7 @@ import parseTransactionType from "./parseTransactionType.js";
  * @param {RawTransaction} rawTransaction 
  * @returns {Transaction}
  */
-export function parseTransaction(rawTransaction){
+export function parseTransaction(rawTransaction) {
     const orderDate = new Date(rawTransaction.orderDate)
     const execDate = new Date(rawTransaction.executionDate)
     const type = parseTransactionType(rawTransaction.type)
