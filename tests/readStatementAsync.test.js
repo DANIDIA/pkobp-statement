@@ -1,6 +1,6 @@
 import test from "node:test"
 import assert from "node:assert/strict"
-import { AccountStatement, Atm, CurrencyType, Transaction, TransactionDescription, TransactionLocation, TransactionType, readStatementAsync } from "../src/index.js"
+import { Atm, CurrencyType, Transaction, TransactionDescription, TransactionLocation, TransactionType, readStatementAsync } from "../src/index.js"
 
 test("readStatementAsync.XML.atmdeposit", async () => {
     

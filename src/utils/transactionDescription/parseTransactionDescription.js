@@ -1,10 +1,10 @@
-import { TransactionType } from "../enums/transactionType.js";
-import { TransactionDescription } from "../types/transactionDescription.js";
-import { Atm } from "../types/atm.js";
-import { Sender } from "../types/sender.js";
-import { Receiver } from "../types/receiver.js";
-import { TransactionLocation } from "../types/transactionLocation.js";
-import { LoanTransactionDescription } from "../types/loanTransactionDescription.js";
+import { TransactionType } from "#enums/transactionType.js";
+import TransactionDescription from "#types/transactionDescription.js";
+import Atm from "#types/atm.js";
+import Sender from "#types/sender.js";
+import Receiver from "#types/receiver.js";
+import TransactionLocation from "#types/transactionLocation.js";
+import LoanTransactionDescription from "#types/loanTransactionDescription.js";
 
 const keyNames = {
     title: "Tytuł",

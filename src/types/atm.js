@@ -1,4 +1,4 @@
-export class Atm 
+export default class Atm 
 {
     /**
      * @param {string | null} id 

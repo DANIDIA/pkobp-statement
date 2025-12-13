@@ -1,10 +1,10 @@
-import { Atm } from "./atm.js"
-import { Receiver } from "./receiver.js"
-import { Sender } from "./sender.js"
-import { TransactionLocation } from "./transactionLocation.js"
-import { LoanTransactionDescription } from "./loanTransactionDescription.js"
+import Atm from "./atm.js"
+import Receiver from "./receiver.js"
+import Sender from "./sender.js"
+import TransactionLocation from "./transactionLocation.js"
+import LoanTransactionDescription from "./loanTransactionDescription.js"
 
-export class TransactionDescription
+export default class TransactionDescription
 {
     /**
      * @param {string} raw 

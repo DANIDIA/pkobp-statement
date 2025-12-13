@@ -1,8 +1,9 @@
 import * as tXml from "txml";
-import { Transaction } from "../types/transaction.js";
-import { RawTransaction } from "../types/rawTransaction.js";
-import { AccountStatement } from "../types/accountStatement.js";
+import Transaction from "#types/transaction.js";
+import RawTransaction from "#types/rawTransaction.js";
+import AccountStatement from "#types/accountStatement.js";
 import { decode } from 'html-entities';
+import { parseTransaction } from "#src/utils/transaction/parseTransaction.js";
 
 /**
  * @param {string} data
@@ -57,7 +58,7 @@ export default async function parseStatementXml(data)
             amountCurrency: amountCurrency,
             endingBalance: endingBalance
         })
-        transactions.push(Transaction.parse(rawTransaction))
+        transactions.push(parseTransaction(rawTransaction))
     }
 
     return new AccountStatement(accountNumber, sinceDate, toDate, transactions)

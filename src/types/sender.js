@@ -1,4 +1,4 @@
-export class Sender
+export default class Sender
 {
     /**
      * @param {string | null} name 

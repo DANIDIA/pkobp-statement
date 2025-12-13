@@ -1,10 +1,8 @@
-import { TransactionType, parseTransactionType } from "../enums/transactionType.js";
-import { TransactionDescription } from "./transactionDescription.js";
-import parseTransactionDescription from "../utils/parseTransactionDescription.js";
-import { RawTransaction } from "./rawTransaction.js";
-import { CurrencyType, parseCurrency } from "../enums/currencyType.js";
+import { TransactionType } from "#enums/transactionType.js";
+import { CurrencyType } from "#enums/currencyType.js";
+import TransactionDescription from "./transactionDescription.js";
 
-export class Transaction
+export default class Transaction
 {
     /**
      * @param {Date} orderDate 
@@ -30,23 +28,5 @@ export class Transaction
         this.amountCurrency = amountCurrency
         /** @type {number} */
         this.endingBalance = endingBalance
-    }
-
-    /**
-     * @param {RawTransaction} rawTransaction 
-     * @returns {Transaction}
-     */
-    static parse(rawTransaction)
-    {
-        const orderDate = new Date(rawTransaction.orderDate)
-        const execDate = new Date(rawTransaction.executionDate)
-        const type = parseTransactionType(rawTransaction.type)
-        const description = parseTransactionDescription(rawTransaction.description, type)
-        const amount = parseFloat(rawTransaction.amount)
-        const amountCurrency = parseCurrency(rawTransaction.amountCurrency)
-        const endingBalance = parseFloat(rawTransaction.endingBalance)
-
-        const newOp = new Transaction(orderDate, execDate, type, description, amount, amountCurrency, endingBalance)
-        return newOp
     }
 }

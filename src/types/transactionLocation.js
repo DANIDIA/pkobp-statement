@@ -1,4 +1,4 @@
-export class TransactionLocation
+export default class TransactionLocation
 {
     /**
      * @param {string | null} country 

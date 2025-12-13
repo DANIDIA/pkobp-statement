@@ -1,6 +1,6 @@
-import { Transaction } from "./transaction.js";
+import Transaction from "./transaction.js";
 
-export class AccountStatement 
+export default class AccountStatement 
 {
     /**
      * @param {string} accountNumber 

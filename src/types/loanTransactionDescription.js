@@ -1,4 +1,4 @@
-export class LoanTransactionDescription
+export default class LoanTransactionDescription
 {
     /**
      * @param {string | null} loanId 
