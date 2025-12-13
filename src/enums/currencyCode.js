@@ -4,12 +4,12 @@
  * @enum {number}
  */
 export const CurrencyCode = Object.freeze({
-    /** Invalid or uninitialized currency value */
+    /** Invalid or uninitialized currency value. */
     Invalid: -1,
-    /** Currency explicitly marked as unsupported */
+    /** Currency explicitly marked as unsupported. */
     Unsupported: 0,
-    /** Polish Złoty (PLN) */
+    /** Polish Złoty (PLN). */
     PLN: 1,
-    /** United States Dollar (USD) */
+    /** United States Dollar (USD). */
     USD: 2
 })

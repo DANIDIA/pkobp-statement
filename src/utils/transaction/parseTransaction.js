@@ -5,7 +5,9 @@ import parseTransactionDescription from "#utils/transactionDescription/parseTran
 import parseTransactionType from "./parseTransactionType.js";
 
 /**
- * @param {RawTransaction} rawTransaction 
+ * Parses a raw transaction representation into a transaction.
+ * 
+ * @param {RawTransaction} rawTransaction
  * @returns {Transaction}
  */
 export function parseTransaction(rawTransaction) {

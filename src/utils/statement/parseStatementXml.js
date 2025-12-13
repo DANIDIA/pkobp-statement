@@ -6,6 +6,7 @@ import { decode } from 'html-entities';
 import { parseTransaction } from "#src/utils/transaction/parseTransaction.js";
 
 /**
+ * Parses raw XML statement data into an account statement object.
  * @param {string} data
  */
 export default async function parseStatementXml(data) {

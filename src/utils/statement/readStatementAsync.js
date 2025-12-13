@@ -2,6 +2,8 @@ import fs from "node:fs/promises"
 import parseStatementXml from "./parseStatementXml.js";
 
 /**
+ * Reads a statement file and parses its data into an account statement object.
+ * 
  * @param {string} path
  * @param {string} fileType
  */

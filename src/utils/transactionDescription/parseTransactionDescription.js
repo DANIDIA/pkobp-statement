@@ -33,6 +33,8 @@ const keyNames = {
 }
 
 /**
+ * Parses raw transaction description into the transaction desctription object.
+ * 
  * @param {string} raw 
  * @param {TransactionType} opType 
  * @returns {TransactionDescription | null}

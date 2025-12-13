@@ -1,7 +1,7 @@
 import { TransactionType } from "#enums/transactionType.js";
 
 /**
- * Parses a transaction code string into a TransactionType enum value.
+ * Parses a transaction name string into a TransactionType enum value.
  * 
  * If the input is empty, null, or undefined - it returns TransactionType.Invalid.
  * If the transaction type is not recognized, sets to TransactionType.Unsupported.
