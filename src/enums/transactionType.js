@@ -1,8 +1,8 @@
 /**
- * OperationType enum
+ * TransactionType enum
  * @enum {number}
  */
-export const OperationType = Object.freeze({
+export const TransactionType = Object.freeze({
     /** For invalid objects or masking */
     None: 0,
 
@@ -89,84 +89,84 @@ export const OperationType = Object.freeze({
 
 /**
  * @param {string} text
- * @returns {OperationType}
+ * @returns {TransactionType}
  */
-export function parseOperationType(text)
+export function parseTransactionType(text)
 {
     switch (text) {
 
         case "Przelew z rachunku":
-            return OperationType.TransferOutcoming;
+            return TransactionType.TransferOutcoming;
         case "Przelew na konto":
-            return OperationType.TransferIncoming;
+            return TransactionType.TransferIncoming;
         case "Płatność kartą":
-            return OperationType.CardPayment;
+            return TransactionType.CardPayment;
         case "Obciążenie":
-            return OperationType.Charge;
+            return TransactionType.Charge;
         case "Zakup w terminalu - kod mobilny":
-            return OperationType.TerminalPurchaseBlik;
+            return TransactionType.TerminalPurchaseBlik;
         case "Przelew na telefon przychodz. wew.":
-            return OperationType.IncomingPhoneTransferInternal;
+            return TransactionType.IncomingPhoneTransferInternal;
         case "Przelew na telefon przychodz. zew.":
-            return OperationType.IncomingPhoneTransferExternal;
+            return TransactionType.IncomingPhoneTransferExternal;
         case "Płatność web - kod mobilny":
-            return OperationType.WebPaymentBlik;
+            return TransactionType.WebPaymentBlik;
         case "Naliczenie odsetek":
-            return OperationType.InterestCrediting;
+            return TransactionType.InterestCrediting;
         case "Wypłata w bankomacie - kod mobilny":
-            return OperationType.AtmWithdrawalBlik;
+            return TransactionType.AtmWithdrawalBlik;
         case "Spłata kredytu":
-            return OperationType.LoanRepayment;
+            return TransactionType.LoanRepayment;
         case "Wpłata BLIKIEM we wpłatomacie":
-            return OperationType.AtmDepositBlik;
+            return TransactionType.AtmDepositBlik;
         case "Autooszczędzanie":
-            return OperationType.AutoSavings;
+            return TransactionType.AutoSavings;
         case "WYMIANA W KANTORZE - UZNANIE":
-            return OperationType.CurrencyExchangeCredit;
+            return TransactionType.CurrencyExchangeCredit;
         case "Zwrot płatności kartą":
-            return OperationType.CardPaymentRefund;
+            return TransactionType.CardPaymentRefund;
         case "Opłata":
-            return OperationType.Fee;
+            return TransactionType.Fee;
         case "Wpłata gotówkowa w kasie":
-            return OperationType.CashRegisterDeposit;
+            return TransactionType.CashRegisterDeposit;
         case "Wpłata gotówki we wpłatomacie":
-            return OperationType.AtmDeposit;
+            return TransactionType.AtmDeposit;
         case "BLIK_CONTACTLESS_PAYMENT_RETURN":
-            return OperationType.BlikContactlessPaymentReturn;
+            return TransactionType.BlikContactlessPaymentReturn;
         case "Przelew natychmiastowy":
-            return OperationType.InstantTransferOutcoming;
+            return TransactionType.InstantTransferOutcoming;
         case "Zwrot w terminalu":
-            return OperationType.TerminalRefund;
+            return TransactionType.TerminalRefund;
         case "Uznanie":
-            return OperationType.Crediting;
+            return TransactionType.Crediting;
         // found 10.12.2025
         case "Przelew Natychmiastowy na konto":
-            return OperationType.InstantTransferIncoming;
+            return TransactionType.InstantTransferIncoming;
         case "Wypłata gotówkowa z kasy":
-            return OperationType.CashRegisterWithdrawal;
+            return TransactionType.CashRegisterWithdrawal;
         case "Wypłata z bankomatu":
-            return OperationType.AtmWithdrawal;
+            return TransactionType.AtmWithdrawal;
         case "Anulowanie zakupu w terminalu - kod mobilny":
-            return OperationType.TerminalPurchaseCancelBlik;
+            return TransactionType.TerminalPurchaseCancelBlik;
         case "Przelew zagraniczny i walutowy":
-            return OperationType.ForeignCurrencyTransferIncoming;
+            return TransactionType.ForeignCurrencyTransferIncoming;
         case "Opłata za użytkowanie karty":
-            return OperationType.CardUsageFee;
+            return TransactionType.CardUsageFee;
         case "WYMIANA W KANTORZE - OBCIĄŻENIE":
-            return OperationType.CurrencyExchangeCharge;
+            return TransactionType.CurrencyExchangeCharge;
         case "Przelew Paybynet":
-            return OperationType.PaybynetTransferOutcoming;
+            return TransactionType.PaybynetTransferOutcoming;
         case "Przelew Paybynet na konto":
-            return OperationType.PaybynetTransferIncoming;
+            return TransactionType.PaybynetTransferIncoming;
         case "Podatek od odsetek":
-            return OperationType.InterestTax;
+            return TransactionType.InterestTax;
 
         case "":
         case null:
         case undefined:
-            return OperationType.None;
+            return TransactionType.None;
 
         default:
-            throw new Error(`Not supported operation type: "${text}"`);
+            throw new Error(`Not supported transaction type: "${text}"`);
     }
 }

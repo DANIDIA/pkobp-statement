@@ -1,4 +1,4 @@
-export class RawOperation
+export class RawTransaction
 {
     /**
      * @param {string} orderDate 

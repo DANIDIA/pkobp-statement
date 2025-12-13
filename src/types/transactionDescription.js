@@ -1,10 +1,10 @@
 import { Atm } from "./atm.js"
 import { Receiver } from "./receiver.js"
 import { Sender } from "./sender.js"
-import { OperationLocation } from "./operationLocation.js"
+import { TransactionLocation } from "./transactionLocation.js"
 import { LoanTransactionDescription } from "./loanTransactionDescription.js"
 
-export class OperationDescription
+export class TransactionDescription
 {
     /**
      * @param {string} raw 
@@ -19,7 +19,7 @@ export class OperationDescription
      * @param {string | null} clientsReferenceIdentifier 
      * @param {Sender | null} sender 
      * @param {Receiver | null} receiver 
-     * @param {OperationLocation | null} location 
+     * @param {TransactionLocation | null} location 
      * @param {LoanTransactionDescription | null} loanTransaction 
      */
     constructor(raw, title, phoneNumber, cardNumber, originalAmount, executionDate,
@@ -50,7 +50,7 @@ export class OperationDescription
         this.sender = sender 
         /** @type {Receiver | null} */
         this.receiver = receiver 
-        /** @type {OperationLocation | null} */
+        /** @type {TransactionLocation | null} */
         this.location = location 
         /** @type {LoanTransactionDescription | null} */
         this.loanTransaction = loanTransaction 

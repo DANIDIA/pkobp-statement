@@ -1,9 +1,9 @@
-import { OperationType } from "../enums/operationType.js";
-import { OperationDescription } from "../types/operationDescription.js";
+import { TransactionType } from "../enums/transactionType.js";
+import { TransactionDescription } from "../types/transactionDescription.js";
 import { Atm } from "../types/atm.js";
 import { Sender } from "../types/sender.js";
 import { Receiver } from "../types/receiver.js";
-import { OperationLocation } from "../types/operationLocation.js";
+import { TransactionLocation } from "../types/transactionLocation.js";
 import { LoanTransactionDescription } from "../types/loanTransactionDescription.js";
 
 const keyNames = {
@@ -34,21 +34,21 @@ const keyNames = {
 
 /**
  * @param {string} raw 
- * @param {OperationType} opType 
- * @returns {OperationDescription | null}
+ * @param {TransactionType} opType 
+ * @returns {TransactionDescription | null}
  */
-export default function parseOperationDescription(raw, opType)
+export default function parseTransactionDescription(raw, opType)
 {
-    if (opType == OperationType.Crediting)
+    if (opType == TransactionType.Crediting)
     {
-        return new OperationDescription(raw, null, null, null, null, null,
+        return new TransactionDescription(raw, null, null, null, null, null,
             null, raw, raw, null, null, null, null, null
         )
     }
 
     let sepUseSpace = true
     // because "KAPITAŁ:", not "KAPITAŁ :"
-    if (opType == OperationType.LoanRepayment)
+    if (opType == TransactionType.LoanRepayment)
         sepUseSpace = false
     
     const sepLen = sepUseSpace ? 2 : 1
@@ -71,7 +71,7 @@ export default function parseOperationDescription(raw, opType)
     }
 
     if (foundKeys.length == 0){
-        return new OperationDescription(raw, null,
+        return new TransactionDescription(raw, null,
             null,null,null, null,null,null,null,null,null,null,null,
             null
         )
@@ -143,8 +143,8 @@ export default function parseOperationDescription(raw, opType)
     // atm
     if (data.has(keyNames.atmName))
         atmName = data.get(keyNames.atmName)
-    if (opType == OperationType.AtmDeposit || opType == OperationType.AtmDepositBlik
-        || opType == OperationType.AtmWithdrawalBlik || opType == OperationType.AtmWithdrawal
+    if (opType == TransactionType.AtmDeposit || opType == TransactionType.AtmDepositBlik
+        || opType == TransactionType.AtmWithdrawalBlik || opType == TransactionType.AtmWithdrawal
         )
         if (data.has(null))
         {        
@@ -155,11 +155,11 @@ export default function parseOperationDescription(raw, opType)
     if (data.has(keyNames.identifier))
         identifier = data.get(keyNames.identifier)
     else if (
-        opType == OperationType.BlikContactlessPaymentReturn ||
-        opType == OperationType.CardPayment ||
-        opType == OperationType.CardPaymentRefund ||
-        opType == OperationType.TerminalPurchaseBlik ||
-        opType == OperationType.TerminalRefund ) {
+        opType == TransactionType.BlikContactlessPaymentReturn ||
+        opType == TransactionType.CardPayment ||
+        opType == TransactionType.CardPaymentRefund ||
+        opType == TransactionType.TerminalPurchaseBlik ||
+        opType == TransactionType.TerminalRefund ) {
         if (data.has(null)){
             identifier = data.get(null)
         }
@@ -226,11 +226,11 @@ export default function parseOperationDescription(raw, opType)
     if (receiverName || receiverAccountNumber || receiverAddress)
         receiver = new Receiver(receiverName, receiverAccountNumber, receiverAddress)
     if (data.has(keyNames.location))
-        location = new OperationLocation(locationCountry, locationCity, locationAddress)
+        location = new TransactionLocation(locationCountry, locationCity, locationAddress)
     if (loanId || loanPrincipal || loanInterest || loanCapitalizedInterest || loanPenaltyInterest)
         loan = new LoanTransactionDescription(loanId, loanPrincipal, loanInterest, loanCapitalizedInterest, loanPenaltyInterest)
 
-    return new OperationDescription(raw, title, phoneNumber, cardNumber, originalAmount, executionDate, atm, identifier, referenceNumber, clientsReferenceIdentifier, sender, receiver, location, loan)
+    return new TransactionDescription(raw, title, phoneNumber, cardNumber, originalAmount, executionDate, atm, identifier, referenceNumber, clientsReferenceIdentifier, sender, receiver, location, loan)
 
     // throw error in the future
 } 

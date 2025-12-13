@@ -30,6 +30,6 @@ export function parseCurrency(text)
             return Currency.None;
 
         default:
-            throw new Error(`Not supported operation type: "${text}"`);
+            throw new Error(`Not supported transaction type: "${text}"`);
     }
 }

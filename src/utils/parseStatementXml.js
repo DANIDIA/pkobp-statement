@@ -1,6 +1,6 @@
 import * as tXml from "txml";
-import { Operation } from "../types/operation.js";
-import { RawOperation } from "../types/rawOperation.js";
+import { Transaction } from "../types/transaction.js";
+import { RawTransaction } from "../types/rawTransaction.js";
 import { AccountStatement } from "../types/accountStatement.js";
 import { decode } from 'html-entities';
 
@@ -23,15 +23,15 @@ export default async function parseStatementXml(data)
     const sinceDate = new Date(searchDateTag.attributes.since)
     const toDate = new Date(searchDateTag.attributes.to)
 
-    /** @type {Array<Operation>} */
-    const operations = []
+    /** @type {Array<Transaction>} */
+    const transactions = []
 
     /** @type {import("txml/txml").tNode} */
-    const allOpsTag = historyTag.children[1]
-    for(const opTag of allOpsTag.children)
+    const allTrxsTag = historyTag.children[1]
+    for(const trxTag of allTrxsTag.children)
     {
     /** @type {Array<import("txml/txml").tNode>} */
-        const childTags = opTag.children
+        const childTags = trxTag.children
 
         const orderDateTag = childTags.find((node) => node.tagName == "order-date")
         const execDateTag = childTags.find((node) => node.tagName == "exec-date")
@@ -48,7 +48,7 @@ export default async function parseStatementXml(data)
         const amountCurrency = decode(amountTag.attributes.curr, {level: 'xml'})
         const endingBalance = decode(endingBalanceTag.children[0], {level: 'xml'})
 
-        const rawOperation = Object.assign(new RawOperation(), {
+        const rawTransaction = Object.assign(new RawTransaction(), {
             orderDate: orderDate,
             executionDate: execDate,
             type: type,
@@ -57,8 +57,8 @@ export default async function parseStatementXml(data)
             amountCurrency: amountCurrency,
             endingBalance: endingBalance
         })
-        operations.push(Operation.parse(rawOperation))
+        transactions.push(Transaction.parse(rawTransaction))
     }
 
-    return new AccountStatement(accountNumber, sinceDate, toDate, operations)
+    return new AccountStatement(accountNumber, sinceDate, toDate, transactions)
 }
