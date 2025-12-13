@@ -9,7 +9,4 @@ export default class Atm {
         /** @type {string | null} */
         this.name = name
     }
-
-    hasId() { return this.id != null }
-    hasName() { return this.name != null }
 }

@@ -12,7 +12,4 @@ export default class TransactionLocation {
         /** @type {string | null} */
         this.street = street
     }
-    hasCountry() { return this.country != null }
-    hasCity() { return this.city != null }
-    hasStreet() { return this.street != null }
 }

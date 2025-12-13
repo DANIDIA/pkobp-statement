@@ -54,17 +54,4 @@ export default class TransactionDescription {
         /** @type {LoanTransactionDescription | null} */
         this.loanTransaction = loanTransaction
     }
-    hasTitle() { return this.title != null }
-    hasPhoneNumber() { return this.phoneNumber != null }
-    hasCardNumber() { return this.cardNumber != null }
-    hasOriginalAmount() { return this.originalAmount != null }
-    hasExecutionDate() { return this.executionDate != null }
-    hasAtm() { return this.atm != null }
-    hasIdentifier() { return this.identifier != null }
-    hasReferenceNumber() { return this.referenceNumber != null }
-    hasClientsReferenceIdentifier() { return this.clientsReferenceIdentifier != null }
-    hasSender() { return this.sender != null }
-    hasReceiver() { return this.receiver != null }
-    hasLocation() { return this.location != null }
-    hasLoanTransaction() { return this.loanTransaction != null }
 }

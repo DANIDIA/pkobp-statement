@@ -1,5 +1,4 @@
-export default class LoanTransactionDescription
-{
+export default class LoanTransactionDescription {
     /**
      * @param {string | null} loanId 
      * @param {float | null} principal 
@@ -19,10 +18,4 @@ export default class LoanTransactionDescription
         /** @type {number | null} */
         this.penaltyInterest = penaltyInterest
     }
-
-    hasLoanId() { return this.loanId != null }
-    hasPrincipal() { return this.principal != null }
-    hasInterest() { return this.interest != null }
-    hasCapitalizedInterest() { return this.capitalizedInterest != null }
-    hasPenaltyInterest() { return this.penaltyInterest != null }
 }
