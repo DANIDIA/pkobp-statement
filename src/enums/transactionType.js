@@ -1,96 +1,100 @@
 /**
- * TransactionType enum
+ * Represents normalized transaction categories parsed from bank history.
+ * 
  * @enum {number}
  */
 export const TransactionType = Object.freeze({
-    /** For invalid objects or masking */
-    None: 0,
+    /** Invalid or uninitialized transcation type value */
+    Invalid: -1,
+    /** Type explicitly marked as unsupported */
+    Unsupported: 0,
 
     // --- Transfers (outgoing / incoming) ---
-    /** 'Przelew z rachunku' */
-    TransferOutcoming: 1,
-    /** 'Przelew na konto' */
+    /** Outgoing bank transfer */
+    TransferOutgoing: 1,
+    /** Incoming bank transfer */
     TransferIncoming: 2,
-    /** 'Przelew natychmiastowy' */
-    InstantTransferOutcoming: 3,
+    /** Outgoing instant transfer */
+    InstantTransferOutgoing: 3,
+
     // Found 10.12.2025
-    /** 'Przelew Natychmiastowy na konto' */
+    /** Incoming instant transfer */
     InstantTransferIncoming: 4,
-    /** 'Przelew Paybynet' */
-    PaybynetTransferOutcoming: 5,
-    /** 'Przelew Paybynet na konto' */
+    /** Outgoing Paybynet transfer */
+    PaybynetTransferOutgoing: 5,
+    /** Incoming Paybynet transfer */
     PaybynetTransferIncoming: 6,
     // TODO: Fix parsing!
-    /** 'Przelew zagraniczny i walutowy' */
+    /** Incoming foreign or currency transfer */
     ForeignCurrencyTransferIncoming: 7,
 
     // --- Phone transfers ---
-    /** 'Przelew na telefon przychodz. wew.' */
-    IncomingPhoneTransferInternal: 8,
-    /** 'Przelew na telefon przychodz. zew.' */
-    IncomingPhoneTransferExternal: 9,
+    /** Incoming (PKO-PKO) phone transfer */
+    PhoneTransferInternal: 8,
+    /** Incoming (PKO-outher bank) phone transfer */
+    PhoneTransferExternal: 9,
 
     // --- Card & web payments / BLIK ---
-    /** 'Płatność kartą' */
+    /** Card payment */
     CardPayment: 10,
-    /** 'Zwrot płatności kartą' */
+    /** Card payment refund */
     CardPaymentRefund: 11,
-    /** 'Opłata za użytkowanie karty' */
+    /** Card usage or maintenance fee */
     CardUsageFee: 12,
-    /** 'Płatność web - kod mobilny' */
+    /** BLIK web payment */
     WebPaymentBlik: 13,
-    /** 'Zakup w terminalu - kod mobilny' */
+    /** BLIK terminal purchase */
     TerminalPurchaseBlik: 14,
-    /** 'Anulowanie zakupu w terminalu - kod mobilny' */
+    /** Cancelled BLIK terminal purchase */
     TerminalPurchaseCancelBlik: 15,
-    /** 'BLIK_CONTACTLESS_PAYMENT_RETURN' */
+    /** Returned BLIK contactless payment */
     BlikContactlessPaymentReturn: 16,
-    /** 'Zwrot w terminalu' */
+    /** Refund processed at a terminal */
     TerminalRefund: 17,
 
     // --- ATM & Cash ---
-    /** 'Wypłata z bankomatu' */
+    /** Cash withdrawal from ATM */
     AtmWithdrawal: 18,
-    /** 'Wypłata w bankomacie - kod mobilny' */
+    /** BLIK cash withdrawal from ATM */
     AtmWithdrawalBlik: 19,
-    /** 'Wpłata gotówki we wpłatomacie' */
+    /** Cash deposit at ATM */
     AtmDeposit: 20,
-    /** 'Wpłata BLIKIEM we wpłatomacie' */
+    /** BLIK cash deposit at ATM */
     AtmDepositBlik: 21,
-    /** 'Wpłata gotówkowa w kasie' */
+    /** Cash deposit at bank counter */
     CashRegisterDeposit: 22,
-    /** 'Wypłata gotówkowa z kasy' */
+    /** Cash withdrawal at bank counter */
     CashRegisterWithdrawal: 23,
 
     // --- Loans, savings, interest ---
-    /** 'Spłata kredytu' */
+    /** Loan or credit repayment */
     LoanRepayment: 24,
-    /** 'Autooszczędzanie' */
+    /** Automatic savings transfer */
     AutoSavings: 25,
-    /** 'Naliczenie odsetek' */
+    /** Interest credited to account */
     InterestCrediting: 26,
-    /** 'Podatek od odsetek' */
+    /** Tax charged on interest */
     InterestTax: 27,
-    /** 'Uznanie */
+    /** Generic account credit */
     Crediting: 28,
 
     // --- Currency exchange ---
-    /** 'WYMIANA W KANTORZE - UZNANIE' */
+    /** Currency exchange credit */
     CurrencyExchangeCredit: 29,
-    /** 'WYMIANA W KANTORZE - OBCIĄŻENIE' */
+    /** Currency exchange charge */
     CurrencyExchangeCharge: 30,
 
     // --- Fees & charges ---
-    /** 'Obciążenie' */
+    /** Generic account charge or debit (needs more inspection) */
     Charge: 31,
-    /** 'Opłata' */
+    /** Fee charged by the bank */
     Fee: 32,
 
     // --- Adjustements ---
-    /** 'Korekta odsetek' */
+    /** Interest correction */
     InterestAdjustment: 33,
-    /** 'Korekta podatku' */
+    /** Tax correction */
     TaxAdjustment: 34,
-    /** 'Korekta' */
+    /** Generic correction or adjustment */
     Adjustment: 35
 })

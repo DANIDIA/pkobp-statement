@@ -4,12 +4,11 @@ import { TransactionType } from "#src/enums/transactionType.js";
  * @param {string} text
  * @returns {TransactionType}
  */
-export default function parseTransactionType(text)
-{
+export default function parseTransactionType(text) {
     switch (text) {
 
         case "Przelew z rachunku":
-            return TransactionType.TransferOutcoming;
+            return TransactionType.TransferOutgoing;
         case "Przelew na konto":
             return TransactionType.TransferIncoming;
         case "Płatność kartą":
@@ -19,9 +18,9 @@ export default function parseTransactionType(text)
         case "Zakup w terminalu - kod mobilny":
             return TransactionType.TerminalPurchaseBlik;
         case "Przelew na telefon przychodz. wew.":
-            return TransactionType.IncomingPhoneTransferInternal;
+            return TransactionType.PhoneTransferInternal;
         case "Przelew na telefon przychodz. zew.":
-            return TransactionType.IncomingPhoneTransferExternal;
+            return TransactionType.PhoneTransferExternal;
         case "Płatność web - kod mobilny":
             return TransactionType.WebPaymentBlik;
         case "Naliczenie odsetek":
@@ -47,7 +46,7 @@ export default function parseTransactionType(text)
         case "BLIK_CONTACTLESS_PAYMENT_RETURN":
             return TransactionType.BlikContactlessPaymentReturn;
         case "Przelew natychmiastowy":
-            return TransactionType.InstantTransferOutcoming;
+            return TransactionType.InstantTransferOutgoing;
         case "Zwrot w terminalu":
             return TransactionType.TerminalRefund;
         case "Uznanie":
@@ -68,7 +67,7 @@ export default function parseTransactionType(text)
         case "WYMIANA W KANTORZE - OBCIĄŻENIE":
             return TransactionType.CurrencyExchangeCharge;
         case "Przelew Paybynet":
-            return TransactionType.PaybynetTransferOutcoming;
+            return TransactionType.PaybynetTransferOutgoing;
         case "Przelew Paybynet na konto":
             return TransactionType.PaybynetTransferIncoming;
         case "Podatek od odsetek":
@@ -84,9 +83,9 @@ export default function parseTransactionType(text)
         case "":
         case null:
         case undefined:
-            return TransactionType.None;
+            return TransactionType.Invalid;
 
         default:
-            throw new Error(`Not supported transaction type: "${text}"`);
+            return TransactionType.Unsupported;
     }
 }
