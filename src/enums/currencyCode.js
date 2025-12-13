@@ -3,7 +3,7 @@
  * 
  * @enum {number}
  */
-export const CurrencyType = Object.freeze({
+export const CurrencyCode = Object.freeze({
     /** Invalid or uninitialized currency value */
     Invalid: -1,
     /** Currency explicitly marked as unsupported */

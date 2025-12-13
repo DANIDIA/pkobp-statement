@@ -1,5 +1,5 @@
 import { TransactionType } from "#enums/transactionType.js";
-import { CurrencyType } from "#enums/currencyType.js";
+import { CurrencyCode } from "#src/enums/currencyCode.js";
 import TransactionDescription from "./transactionDescription.js";
 
 export default class Transaction {
@@ -9,10 +9,10 @@ export default class Transaction {
      * @param {TransactionType} type 
      * @param {TransactionDescription} description 
      * @param {number} amount 
-     * @param {CurrencyType} amountCurrency 
+     * @param {CurrencyCode} currency 
      * @param {number} endingBalance 
      */
-    constructor(orderDate, execDate, type, description, amount, amountCurrency, endingBalance) {
+    constructor(orderDate, execDate, type, description, amount, currency, endingBalance) {
         /** @type {Date} */
         this.orderDate = orderDate
         /** @type {Date} */
@@ -23,8 +23,8 @@ export default class Transaction {
         this.description = description
         /** @type {number} */
         this.amount = amount
-        /** @type {CurrencyType} */
-        this.amountCurrency = amountCurrency
+        /** @type {CurrencyCode} */
+        this.amountCurrency = currency
         /** @type {number} */
         this.endingBalance = endingBalance
     }

@@ -1,91 +1,58 @@
-import { TransactionType } from "#src/enums/transactionType.js";
+import { TransactionType } from "#enums/transactionType.js";
 
 /**
- * @param {string} text
+ * Parses a transaction code string into a TransactionType enum value.
+ * 
+ * If the input is empty, null, or undefined - it returns TransactionType.Invalid.
+ * If the transaction type is not recognized, sets to TransactionType.Unsupported.
+ * 
+ * @param {string | null | undefined} text
  * @returns {TransactionType}
  */
 export default function parseTransactionType(text) {
-    switch (text) {
-
-        case "Przelew z rachunku":
-            return TransactionType.TransferOutgoing;
-        case "Przelew na konto":
-            return TransactionType.TransferIncoming;
-        case "Płatność kartą":
-            return TransactionType.CardPayment;
-        case "Obciążenie":
-            return TransactionType.Charge;
-        case "Zakup w terminalu - kod mobilny":
-            return TransactionType.TerminalPurchaseBlik;
-        case "Przelew na telefon przychodz. wew.":
-            return TransactionType.PhoneTransferInternal;
-        case "Przelew na telefon przychodz. zew.":
-            return TransactionType.PhoneTransferExternal;
-        case "Płatność web - kod mobilny":
-            return TransactionType.WebPaymentBlik;
-        case "Naliczenie odsetek":
-            return TransactionType.InterestCrediting;
-        case "Wypłata w bankomacie - kod mobilny":
-            return TransactionType.AtmWithdrawalBlik;
-        case "Spłata kredytu":
-            return TransactionType.LoanRepayment;
-        case "Wpłata BLIKIEM we wpłatomacie":
-            return TransactionType.AtmDepositBlik;
-        case "Autooszczędzanie":
-            return TransactionType.AutoSavings;
-        case "WYMIANA W KANTORZE - UZNANIE":
-            return TransactionType.CurrencyExchangeCredit;
-        case "Zwrot płatności kartą":
-            return TransactionType.CardPaymentRefund;
-        case "Opłata":
-            return TransactionType.Fee;
-        case "Wpłata gotówkowa w kasie":
-            return TransactionType.CashRegisterDeposit;
-        case "Wpłata gotówki we wpłatomacie":
-            return TransactionType.AtmDeposit;
-        case "BLIK_CONTACTLESS_PAYMENT_RETURN":
-            return TransactionType.BlikContactlessPaymentReturn;
-        case "Przelew natychmiastowy":
-            return TransactionType.InstantTransferOutgoing;
-        case "Zwrot w terminalu":
-            return TransactionType.TerminalRefund;
-        case "Uznanie":
-            return TransactionType.Crediting;
-        // found 10.12.2025
-        case "Przelew Natychmiastowy na konto":
-            return TransactionType.InstantTransferIncoming;
-        case "Wypłata gotówkowa z kasy":
-            return TransactionType.CashRegisterWithdrawal;
-        case "Wypłata z bankomatu":
-            return TransactionType.AtmWithdrawal;
-        case "Anulowanie zakupu w terminalu - kod mobilny":
-            return TransactionType.TerminalPurchaseCancelBlik;
-        case "Przelew zagraniczny i walutowy":
-            return TransactionType.ForeignCurrencyTransferIncoming;
-        case "Opłata za użytkowanie karty":
-            return TransactionType.CardUsageFee;
-        case "WYMIANA W KANTORZE - OBCIĄŻENIE":
-            return TransactionType.CurrencyExchangeCharge;
-        case "Przelew Paybynet":
-            return TransactionType.PaybynetTransferOutgoing;
-        case "Przelew Paybynet na konto":
-            return TransactionType.PaybynetTransferIncoming;
-        case "Podatek od odsetek":
-            return TransactionType.InterestTax;
-        // found 12.12.2025
-        case "Korekta odsetek":
-            return TransactionType.InterestAdjustment;
-        case "Korekta podatku":
-            return TransactionType.TaxAdjustment;
-        case "Korekta":
-            return TransactionType.Adjustment;
-
-        case "":
-        case null:
-        case undefined:
-            return TransactionType.Invalid;
-
-        default:
-            return TransactionType.Unsupported;
+    if (!text) {
+        return TransactionType.Invalid;
     }
+
+    const typeMap = {
+        "Przelew z rachunku": TransactionType.TransferOutgoing,
+        "Przelew na konto": TransactionType.TransferIncoming,
+        "Płatność kartą": TransactionType.CardPayment,
+        "Obciążenie": TransactionType.Charge,
+        "Zakup w terminalu - kod mobilny": TransactionType.TerminalPurchaseBlik,
+        "Przelew na telefon przychodz. wew.": TransactionType.PhoneTransferInternal,
+        "Przelew na telefon przychodz. zew.": TransactionType.PhoneTransferExternal,
+        "Płatność web - kod mobilny": TransactionType.WebPaymentBlik,
+        "Naliczenie odsetek": TransactionType.InterestCrediting,
+        "Wypłata w bankomacie - kod mobilny": TransactionType.AtmWithdrawalBlik,
+        "Spłata kredytu": TransactionType.LoanRepayment,
+        "Wpłata BLIKIEM we wpłatomacie": TransactionType.AtmDepositBlik,
+        "Autooszczędzanie": TransactionType.AutoSavings,
+        "WYMIANA W KANTORZE - UZNANIE": TransactionType.CurrencyExchangeCredit,
+        "Zwrot płatności kartą": TransactionType.CardPaymentRefund,
+        "Opłata": TransactionType.Fee,
+        "Wpłata gotówkowa w kasie": TransactionType.CashRegisterDeposit,
+        "Wpłata gotówki we wpłatomacie": TransactionType.AtmDeposit,
+        "BLIK_CONTACTLESS_PAYMENT_RETURN": TransactionType.BlikContactlessPaymentReturn,
+        "Przelew natychmiastowy": TransactionType.InstantTransferOutgoing,
+        "Zwrot w terminalu": TransactionType.TerminalRefund,
+        "Uznanie": TransactionType.Crediting,
+        // found 10.12.2025
+        "Przelew Natychmiastowy na konto": TransactionType.InstantTransferIncoming,
+        "Wypłata gotówkowa z kasy": TransactionType.CashRegisterWithdrawal,
+        "Wypłata z bankomatu": TransactionType.AtmWithdrawal,
+        "Anulowanie zakupu w terminalu - kod mobilny": TransactionType.TerminalPurchaseCancelBlik,
+        "Przelew zagraniczny i walutowy": TransactionType.ForeignCurrencyTransferIncoming,
+        "Opłata za użytkowanie karty": TransactionType.CardUsageFee,
+        "WYMIANA W KANTORZE - OBCIĄŻENIE": TransactionType.CurrencyExchangeCharge,
+        "Przelew Paybynet": TransactionType.PaybynetTransferOutgoing,
+        "Przelew Paybynet na konto": TransactionType.PaybynetTransferIncoming,
+        "Podatek od odsetek": TransactionType.InterestTax,
+        // found 12.12.2025
+        "Korekta odsetek": TransactionType.InterestAdjustment,
+        "Korekta podatku": TransactionType.TaxAdjustment,
+        "Korekta": TransactionType.Adjustment
+    };
+    
+    return typeMap[text] ?? TransactionType.Unsupported;
 }

@@ -1,6 +1,6 @@
 import Transaction from "#src/types/transaction.js";
 import RawTransaction from "#types/rawTransaction.js";
-import parseCurrencyType from "#src/utils/currency/parseCurrencyType.js";
+import parseCurrencyCode from "#src/utils/currency/parseCurrencyCode.js";
 import parseTransactionDescription from "#utils/transactionDescription/parseTransactionDescription.js";
 import parseTransactionType from "./parseTransactionType.js";
 
@@ -14,7 +14,7 @@ export function parseTransaction(rawTransaction) {
     const type = parseTransactionType(rawTransaction.type)
     const description = parseTransactionDescription(rawTransaction.description, type)
     const amount = parseFloat(rawTransaction.amount)
-    const amountCurrency = parseCurrencyType(rawTransaction.amountCurrency)
+    const amountCurrency = parseCurrencyCode(rawTransaction.amountCurrency)
     const endingBalance = parseFloat(rawTransaction.endingBalance)
 
     const newOp = new Transaction(orderDate, execDate, type, description, amount, amountCurrency, endingBalance)
