@@ -1,33 +1,33 @@
 /**
- * Currency enum
+ * CurrencyType enum
  * @enum {number}
  */
-export const Currency = Object.freeze({
+export const CurrencyType = Object.freeze({
     /** For invalid objects or masking */
     None: 0,
     /** 'Polish Zlotys' */
-    PLN: 1 << 0,
+    PLN: 1,
     /** 'United States Dollar' */
-    USD: 1 << 1
+    USD: 2
 })
 
 /**
  * @param {string} text
- * @returns {Currency}
+ * @returns {CurrencyType}
  */
 export function parseCurrency(text)
 {
     switch (text) {
 
         case "PLN":
-            return Currency.PLN
+            return CurrencyType.PLN
         case "USD":
-            return Currency.USD
+            return CurrencyType.USD
 
         case "":
         case null:
         case undefined:
-            return Currency.None;
+            return CurrencyType.None;
 
         default:
             throw new Error(`Not supported transaction type: "${text}"`);

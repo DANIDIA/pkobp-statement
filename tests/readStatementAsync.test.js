@@ -1,6 +1,6 @@
 import test from "node:test"
 import assert from "node:assert/strict"
-import { AccountStatement, Atm, Currency, Transaction, TransactionDescription, TransactionLocation, TransactionType, readStatementAsync } from "../src/index.js"
+import { AccountStatement, Atm, CurrencyType, Transaction, TransactionDescription, TransactionLocation, TransactionType, readStatementAsync } from "../src/index.js"
 
 test("readStatementAsync.XML.atmdeposit", async () => {
     
@@ -26,7 +26,7 @@ test("readStatementAsync.XML.atmdeposit", async () => {
             null
         ),
         1000,
-        Currency.PLN,
+        CurrencyType.PLN,
         1000
         )
     const firstOp = statement.transactions[0]

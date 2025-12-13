@@ -1,4 +1,4 @@
-import { Currency } from "#enums/currency.js";
+import { CurrencyType } from "#src/enums/currencyType.js";
 import { Atm } from "#types/atm.js";
 import { TransactionType } from "#enums/transactionType.js";
 import { AccountStatement } from "#types/accountStatement.js";
@@ -25,5 +25,5 @@ export {
 }
 // Enums
 export {
-    Currency, TransactionType
+    CurrencyType, TransactionType
 }

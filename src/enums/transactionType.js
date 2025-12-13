@@ -8,83 +8,91 @@ export const TransactionType = Object.freeze({
 
     // --- Transfers (outgoing / incoming) ---
     /** 'Przelew z rachunku' */
-    TransferOutcoming: 1 << 0,
+    TransferOutcoming: 1,
     /** 'Przelew na konto' */
-    TransferIncoming: 1 << 1,
+    TransferIncoming: 2,
     /** 'Przelew natychmiastowy' */
-    InstantTransferOutcoming: 1 << 2,
+    InstantTransferOutcoming: 3,
     // Found 10.12.2025
     /** 'Przelew Natychmiastowy na konto' */
-    InstantTransferIncoming: 1 << 3,
+    InstantTransferIncoming: 4,
     /** 'Przelew Paybynet' */
-    PaybynetTransferOutcoming: 1 << 4,
+    PaybynetTransferOutcoming: 5,
     /** 'Przelew Paybynet na konto' */
-    PaybynetTransferIncoming: 1 << 5,
+    PaybynetTransferIncoming: 6,
     // TODO: Fix parsing!
     /** 'Przelew zagraniczny i walutowy' */
-    ForeignCurrencyTransferIncoming: 1 << 6,
+    ForeignCurrencyTransferIncoming: 7,
 
     // --- Phone transfers ---
     /** 'Przelew na telefon przychodz. wew.' */
-    IncomingPhoneTransferInternal: 1 << 7,
+    IncomingPhoneTransferInternal: 8,
     /** 'Przelew na telefon przychodz. zew.' */
-    IncomingPhoneTransferExternal: 1 << 8,
+    IncomingPhoneTransferExternal: 9,
 
     // --- Card & web payments / BLIK ---
     /** 'Płatność kartą' */
-    CardPayment: 1 << 9,
+    CardPayment: 10,
     /** 'Zwrot płatności kartą' */
-    CardPaymentRefund: 1 << 10,
+    CardPaymentRefund: 11,
     /** 'Opłata za użytkowanie karty' */
-    CardUsageFee: 1 << 11,
+    CardUsageFee: 12,
     /** 'Płatność web - kod mobilny' */
-    WebPaymentBlik: 1 << 12,
+    WebPaymentBlik: 13,
     /** 'Zakup w terminalu - kod mobilny' */
-    TerminalPurchaseBlik: 1 << 13,
+    TerminalPurchaseBlik: 14,
     /** 'Anulowanie zakupu w terminalu - kod mobilny' */
-    TerminalPurchaseCancelBlik: 1 << 14,
+    TerminalPurchaseCancelBlik: 15,
     /** 'BLIK_CONTACTLESS_PAYMENT_RETURN' */
-    BlikContactlessPaymentReturn: 1 << 15,
+    BlikContactlessPaymentReturn: 16,
     /** 'Zwrot w terminalu' */
-    TerminalRefund: 1 << 16,
+    TerminalRefund: 17,
 
     // --- ATM & Cash ---
     /** 'Wypłata z bankomatu' */
-    AtmWithdrawal: 1 << 17,
+    AtmWithdrawal: 18,
     /** 'Wypłata w bankomacie - kod mobilny' */
-    AtmWithdrawalBlik: 1 << 18,
+    AtmWithdrawalBlik: 19,
     /** 'Wpłata gotówki we wpłatomacie' */
-    AtmDeposit: 1 << 19,
+    AtmDeposit: 20,
     /** 'Wpłata BLIKIEM we wpłatomacie' */
-    AtmDepositBlik: 1 << 20,
+    AtmDepositBlik: 21,
     /** 'Wpłata gotówkowa w kasie' */
-    CashRegisterDeposit: 1 << 21,
+    CashRegisterDeposit: 22,
     /** 'Wypłata gotówkowa z kasy' */
-    CashRegisterWithdrawal: 1 << 22,
+    CashRegisterWithdrawal: 23,
 
     // --- Loans, savings, interest ---
     /** 'Spłata kredytu' */
-    LoanRepayment: 1 << 23,
+    LoanRepayment: 24,
     /** 'Autooszczędzanie' */
-    AutoSavings: 1 << 24,
+    AutoSavings: 25,
     /** 'Naliczenie odsetek' */
-    InterestCrediting: 1 << 25,
+    InterestCrediting: 26,
     /** 'Podatek od odsetek' */
-    InterestTax: 1 << 26,
+    InterestTax: 27,
     /** 'Uznanie */
-    Crediting: 1 << 27,
+    Crediting: 28,
 
     // --- Currency exchange ---
     /** 'WYMIANA W KANTORZE - UZNANIE' */
-    CurrencyExchangeCredit: 1 << 28,
+    CurrencyExchangeCredit: 29,
     /** 'WYMIANA W KANTORZE - OBCIĄŻENIE' */
-    CurrencyExchangeCharge: 1 << 29,
+    CurrencyExchangeCharge: 30,
 
     // --- Fees & charges ---
     /** 'Obciążenie' */
-    Charge: 1 << 30,
+    Charge: 31,
     /** 'Opłata' */
-    Fee: 1 << 31,
+    Fee: 32,
+
+    // --- Adjustements ---
+    /** 'Korekta odsetek' */
+    InterestAdjustment: 33,
+    /** 'Korekta podatku' */
+    TaxAdjustment: 34,
+    /** 'Korekta' */
+    Adjustment: 35
 })
 
 /**
@@ -160,6 +168,13 @@ export function parseTransactionType(text)
             return TransactionType.PaybynetTransferIncoming;
         case "Podatek od odsetek":
             return TransactionType.InterestTax;
+        // found 12.12.2025
+        case "Korekta odsetek":
+            return TransactionType.InterestAdjustment;
+        case "Korekta podatku":
+            return TransactionType.TaxAdjustment;
+        case "Korekta":
+            return TransactionType.Adjustment;
 
         case "":
         case null:
