@@ -37,13 +37,11 @@ const keyNames = {
  * 
  * @param {string} raw 
  * @param {TransactionType} opType 
- * @returns {TransactionDescription | null}
+ * @returns {TransactionDescription | undefined}
  */
 export default function parseTransactionDescription(raw, opType) {
     if (opType == TransactionType.Crediting) {
-        return new TransactionDescription(raw, null, null, null, null, null,
-            null, raw, raw, null, null, null, null, null
-        )
+        return new TransactionDescription({ raw: raw, identifier: raw, referenceNumber: raw })
     }
 
     let sepUseSpace = true
@@ -68,11 +66,8 @@ export default function parseTransactionDescription(raw, opType) {
         }
     }
 
-    if (foundKeys.length == 0) {
-        return new TransactionDescription(raw, null,
-            null, null, null, null, null, null, null, null, null, null, null,
-            null
-        )
+    if (!foundKeys.length) {
+        return new TransactionDescription({ raw: raw });
     }
 
     foundKeys = foundKeys.sort(function (a, b) {
@@ -99,30 +94,30 @@ export default function parseTransactionDescription(raw, opType) {
         data.set(lastKeyName, lastValue)
     }
 
-    let title = null
-    let phoneNumber = null
-    let cardNumber = null
-    let originalAmount = null
-    let executionDate = null
-    let atmId = null
-    let atmName = null
-    let identifier = null
-    let referenceNumber = null
-    let clientsReferenceIdentifier = null
-    let senderName = null
-    let senderAccountNumber = null
-    let senderAddress = null
-    let receiverName = null
-    let receiverAccountNumber = null
-    let receiverAddress = null
-    let locationAddress = null
-    let locationCity = null
-    let locationCountry = null
-    let loanId = null;
-    let loanPrincipal = null
-    let loanInterest = null
-    let loanCapitalizedInterest = null
-    let loanPenaltyInterest = null
+    let title = undefined
+    let phoneNumber = undefined
+    let cardNumber = undefined
+    let originalAmount = undefined
+    let executionDate = undefined
+    let atmId = undefined
+    let atmName = undefined
+    let identifier = undefined
+    let referenceNumber = undefined
+    let clientsReferenceIdentifier = undefined
+    let senderName = undefined
+    let senderAccountNumber = undefined
+    let senderAddress = undefined
+    let receiverName = undefined
+    let receiverAccountNumber = undefined
+    let receiverAddress = undefined
+    let locationAddress = undefined
+    let locationCity = undefined
+    let locationCountry = undefined
+    let loanId = undefined;
+    let loanPrincipal = undefined
+    let loanInterest = undefined
+    let loanCapitalizedInterest = undefined
+    let loanPenaltyInterest = undefined
 
     if (data.has(keyNames.title))
         title = data.get(keyNames.title)
@@ -207,24 +202,39 @@ export default function parseTransactionDescription(raw, opType) {
 
 
 
-    let atm = null;
-    let sender = null;
-    let receiver = null;
-    let location = null;
-    let loan = null;
+    let atm = undefined;
+    let sender = undefined;
+    let receiver = undefined;
+    let location = undefined;
+    let loan = undefined;
 
     if (atmId || atmName)
-        atm = new Atm(atmId, atmName)
+        atm = new Atm({ id: atmId, name: atmName})
     if (senderName || senderAccountNumber || senderAddress)
         sender = new Sender(senderName, senderAccountNumber, senderAddress)
     if (receiverName || receiverAccountNumber || receiverAddress)
         receiver = new Receiver(receiverName, receiverAccountNumber, receiverAddress)
     if (data.has(keyNames.location))
-        location = new TransactionLocation(locationCountry, locationCity, locationAddress)
+        location = new TransactionLocation({ country: locationCountry, city: locationCity, street: locationAddress })
     if (loanId || loanPrincipal || loanInterest || loanCapitalizedInterest || loanPenaltyInterest)
-        loan = new LoanTransactionDescription(loanId, loanPrincipal, loanInterest, loanCapitalizedInterest, loanPenaltyInterest)
+        loan = new LoanTransactionDescription({loanId: loanId, principal: loanPrincipal, interest: loanInterest, capitalizedInterest: loanCapitalizedInterest, penaltyInterest: loanPenaltyInterest})
 
-    return new TransactionDescription(raw, title, phoneNumber, cardNumber, originalAmount, executionDate, atm, identifier, referenceNumber, clientsReferenceIdentifier, sender, receiver, location, loan)
+    return new TransactionDescription({ 
+        raw: raw, 
+        title: title, 
+        phoneNumber: phoneNumber, 
+        cardNumber: cardNumber, 
+        originalAmount: originalAmount, 
+        executionDate: executionDate, 
+        atm: atm, 
+        identifier: identifier, 
+        referenceNumber: referenceNumber, 
+        clientsReferenceIdentifier: clientsReferenceIdentifier, 
+        sender: sender, 
+        receiver: receiver, 
+        location: location, 
+        loan: loan 
+    })
 
     // throw error in the future
 } 

@@ -7,35 +7,40 @@ import TransactionDescription from "./transactionDescription.js";
  */
 export default class Transaction {
     /**
-     * @param {Date} orderDate 
-     *        Date when the transaction was initiated.
-     * @param {Date} execDate 
-     *        Date when the transaction was executed.
-     * @param {TransactionType} type 
-     *        Transaction type.
-     * @param {TransactionDescription} description 
-     *        Full transaction description.
-     * @param {number} amount 
-     *        Transaction amount, includes the sign and the point. 
-     * @param {CurrencyCode} currency 
-     *        Currency of the transaction.
-     * @param {number} endingBalance 
-     *        Account balance after the transaction.
+     * @typedef {Object} TransactionParams
+     * @property {Date} orderDate
+     * Date when the transaction was initiated.
+     * @property {Date} execDate
+     * Date when the transaction was executed.
+     * @property {TransactionType} type
+     * Transaction type.
+     * @property {TransactionDescription} description
+     * Full transaction description.
+     * @property {number} amount
+     * Transaction amount, includes the sign and the point.
+     * @property {CurrencyCode} currency
+     * Currency of the transaction amount.
+     * @property {number} endingBalance
+     * Account balance after the transaction.
      */
-    constructor(orderDate, execDate, type, description, amount, currency, endingBalance) {
+
+    /**
+     * @param {TransactionParams} params
+     */
+    constructor(params) {
         /** @type {Date} Date when the transaction was initiated. */
-        this.orderDate = orderDate
+        this.orderDate = params.orderDate
         /** @type {Date} Date when the transaction was executed. */
-        this.executionDate = execDate
+        this.executionDate = params.execDate
         /** @type {TransactionType} Transaction type. */
-        this.type = type
+        this.type = params.type
         /** @type {TransactionDescription} Full transaction description. */
-        this.description = description
+        this.description = params.description
         /** @type {number} Transaction amount, includes the sign and the point. */
-        this.amount = amount
+        this.amount = params.amount
         /** @type {CurrencyCode} Currency of the transaction amount. */
-        this.amountCurrency = currency
+        this.amountCurrency = params.currency
         /** @type {number} Account balance after the transaction. */
-        this.endingBalance = endingBalance
+        this.endingBalance = params.endingBalance
     }
 }

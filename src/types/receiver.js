@@ -1,15 +1,15 @@
 export default class Receiver {
     /**
-     * @param {string | null} name 
-     * @param {string | null} accountNumber 
-     * @param {string | null} address 
+     * @param {string | undefined} name 
+     * @param {string | undefined} accountNumber 
+     * @param {string | undefined} address 
      */
     constructor(name, accountNumber, address) {
-        /** @type {string | null} */
+        /** @type {string | undefined} */
         this.name = name
-        /** @type {string | null} */
+        /** @type {string | undefined} */
         this.accountNumber = accountNumber
-        /** @type {string | null} */
+        /** @type {string | undefined} */
         this.address = address
     }
 }

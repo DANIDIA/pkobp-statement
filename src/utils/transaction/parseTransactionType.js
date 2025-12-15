@@ -6,7 +6,7 @@ import { TransactionType } from "#enums/transactionType.js";
  * If the input is empty, null, or undefined - it returns TransactionType.Invalid.
  * If the transaction type is not recognized, sets to TransactionType.Unsupported.
  * 
- * @param {string | null | undefined} text
+ * @param {string | undefined | undefined} text
  * @returns {TransactionType}
  */
 export default function parseTransactionType(text) {
