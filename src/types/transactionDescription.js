@@ -9,66 +9,68 @@ import LoanTransactionDescription from "./loanTransactionDescription.js"
  */
 export default class TransactionDescription {
     /**
-     * @param {string} raw 
-     *        Original raw description string.
-     * @param {string | null} title
-     *        Short title or label for the transaction.
-     * @param {string | null} phoneNumber 
-     *        Phone number associated with the transaction (probably is used for BLIK).
-     * @param {string | null} cardNumber 
-     *        Card number used in the transaction.
-     * @param {string | null} originalAmount 
-     *        Original transaction amount with the currency code.
-     * @param {Date | null} executionDate 
-     *        Date when the transaction was executed.
-     * @param {Atm | null} atm 
-     *        Information about an ATM if the transaction occured at an ATM.
-     * @param {string | null} identifier 
-     *        Bank's internal identifier for the transaction (needs more investigation).
-     * @param {string | null} referenceNumber 
-     *        Bank's internal reference number for the transaction (need more investigation).
-     * @param {string | null} clientsReferenceIdentifier 
-     *        Client's identifier for the transaction.
-     * @param {Sender | null} sender 
-     *        Details about the sender of the transaction.
-     * @param {Receiver | null} receiver 
-     *        Details about the receiver of the transaction.
-     * @param {TransactionLocation | null} location
-     *        A place where the transaction occured.
-     * @param {LoanTransactionDescription | null} loanTransaction
-     *        Loan-specific details, if affects a loan.
+     * @typedef {Object} TransactionDescriptionParams
+     * @property {string} raw 
+     * Original raw description string.
+     * @property {string | undefined} title
+     * Short title or label for the transaction.
+     * @property {string | undefined} phoneNumber 
+     * Phone number associated with the transaction (probably is used for BLIK).
+     * @property {string | undefined} cardNumber 
+     * Card number used in the transaction.
+     * @property {string | undefined} originalAmount 
+     * Original transaction amount with the currency code.
+     * @property {Date | undefined} executionDate 
+     * Date when the transaction was executed.
+     * @property {Atm | undefined} atm 
+     * Information about an ATM if the transaction occured at an ATM.
+     * @property {string | undefined} identifier 
+     * Bank's internal identifier for the transaction (needs more investigation).
+     * @property {string | undefined} referenceNumber 
+     * Bank's internal reference number for the transaction (need more investigation).
+     * @property {string | undefined} clientsReferenceIdentifier 
+     * Client's identifier for the transaction.
+     * @property {Sender | undefined} sender 
+     * Details about the sender of the transaction.
+     * @property {Receiver | undefined} receiver 
+     * Details about the receiver of the transaction.
+     * @property {TransactionLocation | undefined} location
+     * A place where the transaction occured.
+     * @property {LoanTransactionDescription | undefined} loanTransaction
+     * Loan-specific details, if affects a loan.
      */
-    constructor(raw, title, phoneNumber, cardNumber, originalAmount, executionDate,
-        atm, identifier, referenceNumber, clientsReferenceIdentifier, sender,
-        receiver, location, loanTransaction
-    ) {
+
+    /**
+     * @param {TransactionDescriptionParams} params
+     */
+    constructor(params) {
         /** @type {string} Original raw description string. */
-        this.raw = raw
-        /** @type {string | null} Short title or label for the transaction. */
-        this.title = title
-        /** @type {string | null} Phone number associated with the transaction (probably is used for BLIK). */
-        this.phoneNumber = phoneNumber
-        /** @type {string | null} Card number used in the transaction. */
-        this.cardNumber = cardNumber
-        /** @type {string | null} Original transaction amount with the currency code. */
-        this.originalAmount = originalAmount
-        /** @type {Date | null} Date when the transaction was executed. */
-        this.executionDate = executionDate
-        /** @type {Atm | null} Information about an ATM if the transaction occured at an ATM. */
-        this.atm = atm
-        /** @type {string | null} Bank's internal identifier for the transaction (needs more investigation). */
-        this.identifier = identifier
-        /** @type {string | null} Bank's internal reference number for the transaction (need more investigation). */
-        this.referenceNumber = referenceNumber
-        /** @type {string | null} Client's identifier for the transaction. */
-        this.clientsReferenceIdentifier = clientsReferenceIdentifier
-        /** @type {Sender | null} Details about the sender of the transaction. */
-        this.sender = sender
-        /** @type {Receiver | null} Details about the receiver of the transaction. */
-        this.receiver = receiver
-        /** @type {TransactionLocation | null} A place where the transaction occured. */
-        this.location = location
-        /** @type {LoanTransactionDescription | null} Loan-specific details, if affects a loan. */
-        this.loanTransaction = loanTransaction
+        this.raw = params.raw
+        /** @type {string | undefined} Short title or label for the transaction. */
+        this.title = params.title
+        /** @type {string | undefined} Phone number associated with the transaction (probably is used for BLIK). */
+        this.phoneNumber = params.phoneNumber
+        /** @type {string | undefined} Card number used in the transaction. */
+        this.cardNumber = params.cardNumber
+        /** @type {string | undefined} Original transaction amount with the currency code. */
+        this.originalAmount = params.originalAmount
+        /** @type {Date | undefined} Date when the transaction was executed. */
+        this.executionDate = params.executionDate
+        /** @type {Atm | undefined} Information about an ATM if the transaction occured at an ATM. */
+        this.atm = params.atm
+        /** @type {string | undefined} Bank's internal identifier for the transaction (needs more investigation). */
+        this.identifier = params.identifier
+        /** @type {string | undefined} Bank's internal reference number for the transaction (need more investigation). */
+        this.referenceNumber = params.referenceNumber
+        /** @type {string | undefined} Client's identifier for the transaction. */
+        this.clientsReferenceIdentifier = params.clientsReferenceIdentifier
+        /** @type {Sender | undefined} Details about the sender of the transaction. */
+        this.sender = params.sender
+        /** @type {Receiver | undefined} Details about the receiver of the transaction. */
+        this.receiver = params.receiver
+        /** @type {TransactionLocation | undefined} A place where the transaction occured. */
+        this.location = params.location
+        /** @type {LoanTransactionDescription | undefined} Loan-specific details, if affects a loan. */
+        this.loanTransaction = params.loanTransaction
     }
 }

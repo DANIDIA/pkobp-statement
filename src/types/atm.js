@@ -3,15 +3,20 @@
  */
 export default class Atm {
     /**
-     * @param {string | null} id 
-     *        Unique identifier of an ATM machine.
-     * @param {string | null} name 
-     *        Alias name of an ATM machine.
+     * @typedef {Object} AtmParams
+     * @property {string | undefined} id
+     * Unique identifier of an ATM machine.
+     * @property {string | undefined} name
+     * Alias name of an ATM machine.
      */
-    constructor(id, name) {
-        /** @type {string | null} Unique identifier of an ATM machine. */
-        this.id = id
-        /** @type {string | null} Alias name of an ATM machine. */
-        this.name = name
+
+    /**
+     * @param {AtmParams} params
+     */
+    constructor(params) {
+        /** @type {string | undefined} Unique identifier of an ATM machine. */
+        this.id = params.id;
+        /** @type {string | undefined} Alias name of an ATM machine. */
+        this.name = params.name;
     }
 }

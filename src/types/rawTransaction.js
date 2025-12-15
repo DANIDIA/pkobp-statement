@@ -3,35 +3,40 @@
  */
 export default class RawTransaction {
     /**
-     * @param {string} orderDate 
-     *        Date when the transaction was initiated (yyyy-mm-ddd format).
-     * @param {string} execDate 
-     *        Date when the transaction was executed (yyyy-mm-ddd format).
-     * @param {string} type 
-     *        Transaction name that will be parsed later to the corresponding type.
-     * @param {string} description 
-     *        Full transaction description.
-     * @param {string} amount 
-     *        Transaction amount, includes the sign and the point. 
-     * @param {string} amountCurrency 
-     *        Currency of the transaction.
-     * @param {string} endingBalance 
-     *        Account balance after the transaction.
+     * @typedef {Object} RawTransactionParams
+     * @property {string} orderDate
+     * Date when the transaction was initiated.
+     * @property {string} execDate
+     * Date when the transaction was executed.
+     * @property {string} type
+     * Transaction type.
+     * @property {string} description
+     * Full transaction description.
+     * @property {string} amount
+     * Transaction amount, includes the sign and the point.
+     * @property {string} currency
+     * Currency of the transaction amount.
+     * @property {string} endingBalance
+     * Account balance after the transaction.
      */
-    constructor(orderDate, execDate, type, description, amount, amountCurrency, endingBalance) {
+
+    /**
+     * @param {RawTransactionParams} params
+     */
+    constructor(params) {
         /** @type {string} Date when the transaction was initiated. */
-        this.orderDate = orderDate
+        this.orderDate = params.orderDate
         /** @type {string} Date when the transaction was executed. */
-        this.executionDate = execDate
+        this.executionDate = params.execDate
         /** @type {string} Transaction type. */
-        this.type = type
+        this.type = params.type
         /** @type {string} Full transaction description. */
-        this.description = description
+        this.description = params.description
         /** @type {string} Transaction amount, includes the sign and the point. */
-        this.amount = amount
+        this.amount = params.amount
         /** @type {string} Currency of the transaction. */
-        this.amountCurrency = amountCurrency
+        this.amountCurrency = params.currency
         /** @type {string} Account balance after the transaction. */
-        this.endingBalance = endingBalance
+        this.endingBalance = params.endingBalance
     }
 }

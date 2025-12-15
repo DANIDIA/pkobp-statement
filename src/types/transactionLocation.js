@@ -3,19 +3,24 @@
  */
 export default class TransactionLocation {
     /**
-     * @param {string | null} country 
-     *        Name of the country.
-     * @param {string | null} city 
-     *        Self-explanatory.
-     * @param {string | null} street 
-     *        Could be a street or a shop's name.
+     * @typedef {Object} TransactionLocationParams
+     * @property {string | undefined} country 
+     * Name of the country.
+     * @property {string | undefined} city 
+     * Self-explanatory.
+     * @property {string | undefined} street 
+     * Could be a street or a shop's name.
      */
-    constructor(country, city, street) {
-        /** @type {string | null} Name of the country. */
-        this.country = country
-        /** @type {string | null} Self-explanatory. */
-        this.city = city
-        /** @type {string | null} Could be a street or a shop's name. */
-        this.street = street
+
+    /**
+     * @param {TransactionLocationParams} params
+     */
+    constructor(params) {
+        /** @type {string | undefined} Name of the country. */
+        this.country = params.country
+        /** @type {string | undefined} Self-explanatory. */
+        this.city = params.city
+        /** @type {string | undefined} Could be a street or a shop's name. */
+        this.street = params.street
     }
 }

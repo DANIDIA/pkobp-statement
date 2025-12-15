@@ -48,13 +48,13 @@ export default async function parseStatementXml(data) {
         const amountCurrency = decode(amountTag.attributes.curr, { level: 'xml' })
         const endingBalance = decode(endingBalanceTag.children[0], { level: 'xml' })
 
-        const rawTransaction = Object.assign(new RawTransaction(), {
+        const rawTransaction = new RawTransaction({
             orderDate: orderDate,
-            executionDate: execDate,
+            execDate: execDate,
             type: type,
             description: description,
             amount: amount,
-            amountCurrency: amountCurrency,
+            currency: amountCurrency,
             endingBalance: endingBalance
         })
         transactions.push(parseTransaction(rawTransaction))

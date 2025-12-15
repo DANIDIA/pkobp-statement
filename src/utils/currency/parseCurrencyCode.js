@@ -6,7 +6,7 @@ import { CurrencyCode } from "#src/enums/currencyCode.js";
  * If the input is empty, null, or undefined - it returns CurrencyCode.Invalid.
  * If the currency is not recognized, sets to CurrencyCode.Unsupported.
  * 
- * @param {string | null | undefined} text
+ * @param {string | undefined | undefined} text
  * @returns {CurrencyCode}
  */
 export default function parseCurrencyCode(text) {
