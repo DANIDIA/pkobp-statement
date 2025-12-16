@@ -1,10 +1,9 @@
 import { TransactionType } from "#enums/transactionType.js";
 import TransactionDescription from "#types/transactionDescription.js";
 import Atm from "#types/atm.js";
-import Sender from "#types/sender.js";
-import Receiver from "#types/receiver.js";
 import TransactionLocation from "#types/transactionLocation.js";
 import LoanTransactionDescription from "#types/loanTransactionDescription.js";
+import TransactionParticipant from "#src/types/transactionParticipant.js";
 
 const keyNames = {
     title: "Tytuł",
@@ -209,31 +208,40 @@ export default function parseTransactionDescription(raw, opType) {
     let loan = undefined;
 
     if (atmId || atmName)
-        atm = new Atm({ id: atmId, name: atmName})
+        atm = new Atm({ id: atmId, name: atmName })
     if (senderName || senderAccountNumber || senderAddress)
-        sender = new Sender(senderName, senderAccountNumber, senderAddress)
+        sender = new TransactionParticipant({
+            name: senderName,
+            accountNumber:
+                senderAccountNumber,
+            address: senderAddress
+        })
     if (receiverName || receiverAccountNumber || receiverAddress)
-        receiver = new Receiver(receiverName, receiverAccountNumber, receiverAddress)
+        receiver = new TransactionParticipant({
+            name: receiverName,
+            accountNumber: receiverAccountNumber,
+            address: receiverAddress
+        })
     if (data.has(keyNames.location))
         location = new TransactionLocation({ country: locationCountry, city: locationCity, street: locationAddress })
     if (loanId || loanPrincipal || loanInterest || loanCapitalizedInterest || loanPenaltyInterest)
-        loan = new LoanTransactionDescription({loanId: loanId, principal: loanPrincipal, interest: loanInterest, capitalizedInterest: loanCapitalizedInterest, penaltyInterest: loanPenaltyInterest})
+        loan = new LoanTransactionDescription({ loanId: loanId, principal: loanPrincipal, interest: loanInterest, capitalizedInterest: loanCapitalizedInterest, penaltyInterest: loanPenaltyInterest })
 
-    return new TransactionDescription({ 
-        raw: raw, 
-        title: title, 
-        phoneNumber: phoneNumber, 
-        cardNumber: cardNumber, 
-        originalAmount: originalAmount, 
-        executionDate: executionDate, 
-        atm: atm, 
-        identifier: identifier, 
-        referenceNumber: referenceNumber, 
-        clientsReferenceIdentifier: clientsReferenceIdentifier, 
-        sender: sender, 
-        receiver: receiver, 
-        location: location, 
-        loan: loan 
+    return new TransactionDescription({
+        raw: raw,
+        title: title,
+        phoneNumber: phoneNumber,
+        cardNumber: cardNumber,
+        originalAmount: originalAmount,
+        executionDate: executionDate,
+        atm: atm,
+        identifier: identifier,
+        referenceNumber: referenceNumber,
+        clientsReferenceIdentifier: clientsReferenceIdentifier,
+        sender: sender,
+        receiver: receiver,
+        location: location,
+        loan: loan
     })
 
     // throw error in the future

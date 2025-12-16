@@ -1,8 +1,7 @@
 import Atm from "./atm.js"
-import Receiver from "./receiver.js"
-import Sender from "./sender.js"
 import TransactionLocation from "./transactionLocation.js"
 import LoanTransactionDescription from "./loanTransactionDescription.js"
+import TransactionParticipant from "./transactionParticipant.js"
 
 /**
  * Represents a detailed description of a bank transaction.
@@ -30,9 +29,9 @@ export default class TransactionDescription {
      * Bank's internal reference number for the transaction (need more investigation).
      * @property {string | undefined} clientsReferenceIdentifier 
      * Client's identifier for the transaction.
-     * @property {Sender | undefined} sender 
+     * @property {TransactionParticipant | undefined} sender 
      * Details about the sender of the transaction.
-     * @property {Receiver | undefined} receiver 
+     * @property {TransactionParticipant | undefined} receiver 
      * Details about the receiver of the transaction.
      * @property {TransactionLocation | undefined} location
      * A place where the transaction occured.
@@ -64,9 +63,9 @@ export default class TransactionDescription {
         this.referenceNumber = params.referenceNumber
         /** @type {string | undefined} Client's identifier for the transaction. */
         this.clientsReferenceIdentifier = params.clientsReferenceIdentifier
-        /** @type {Sender | undefined} Details about the sender of the transaction. */
+        /** @type {TransactionParticipant | undefined} Details about the sender of the transaction. */
         this.sender = params.sender
-        /** @type {Receiver | undefined} Details about the receiver of the transaction. */
+        /** @type {TransactionParticipant | undefined} Details about the receiver of the transaction. */
         this.receiver = params.receiver
         /** @type {TransactionLocation | undefined} A place where the transaction occured. */
         this.location = params.location
