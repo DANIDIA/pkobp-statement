@@ -21,8 +21,10 @@ export default class TransactionDescription {
      * Original transaction amount with the currency code.
      * @property {Date | undefined} executionDate 
      * Date when the transaction was executed.
+     * @property {Date | undefined} additionalInterestDate
+     * Date on which the additional interest was adjusted.
      * @property {Atm | undefined} atm 
-     * Information about an ATM if the transaction occured at an ATM.
+     * Information about an ATM if the transaction occurred at an ATM.
      * @property {string | undefined} identifier 
      * Bank's internal identifier for the transaction (needs more investigation).
      * @property {string | undefined} referenceNumber 
@@ -34,7 +36,7 @@ export default class TransactionDescription {
      * @property {TransactionParticipant | undefined} receiver 
      * Details about the receiver of the transaction.
      * @property {TransactionLocation | undefined} location
-     * A place where the transaction occured.
+     * A place where the transaction occurred.
      * @property {LoanTransactionDescription | undefined} loanTransaction
      * Loan-specific details, if affects a loan.
      */
@@ -55,7 +57,9 @@ export default class TransactionDescription {
         this.originalAmount = params.originalAmount
         /** @type {Date | undefined} Date when the transaction was executed. */
         this.executionDate = params.executionDate
-        /** @type {Atm | undefined} Information about an ATM if the transaction occured at an ATM. */
+        /** @type {Date | undefined} Date on which the additional interest was adjusted. */
+        this.additionalInterestDate = params.additionalInterestDate
+        /** @type {Atm | undefined} Information about an ATM if the transaction occurred at an ATM. */
         this.atm = params.atm
         /** @type {string | undefined} Bank's internal identifier for the transaction (needs more investigation). */
         this.identifier = params.identifier
@@ -67,7 +71,7 @@ export default class TransactionDescription {
         this.sender = params.sender
         /** @type {TransactionParticipant | undefined} Details about the receiver of the transaction. */
         this.receiver = params.receiver
-        /** @type {TransactionLocation | undefined} A place where the transaction occured. */
+        /** @type {TransactionLocation | undefined} A place where the transaction occurred. */
         this.location = params.location
         /** @type {LoanTransactionDescription | undefined} Loan-specific details, if affects a loan. */
         this.loanTransaction = params.loanTransaction

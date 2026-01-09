@@ -29,6 +29,7 @@ const keyNames = {
     loanInterest: "ODSETKI",
     loanCapitalizedInterest: "ODSETKI SKAPIT.",
     loanPenaltyInterest: "ODSETKI KARNE",
+    additionalInterestDate: "DOD."
 }
 
 /**
@@ -39,10 +40,6 @@ const keyNames = {
  * @returns {TransactionDescription | undefined}
  */
 export default function parseTransactionDescription(raw, opType) {
-    if (opType == TransactionType.Crediting) {
-        return new TransactionDescription({ raw: raw, identifier: raw, referenceNumber: raw })
-    }
-
     let sepUseSpace = true
     // because "KAPITAŁ:", not "KAPITAŁ :"
     if (opType == TransactionType.LoanRepayment)
@@ -54,15 +51,22 @@ export default function parseTransactionDescription(raw, opType) {
     for (const keyName of Object.values(keyNames)) {
         // build keyname like "Bankomat :"
         let lookKeyName = keyName
-        if (sepUseSpace)
-            lookKeyName += " "
-        lookKeyName += ":"
+
+        if (keyName != keyNames.additionalInterestDate){
+            if (sepUseSpace)
+                lookKeyName += " "
+            lookKeyName += ":"
+        }
 
         const index = raw.indexOf(lookKeyName)
 
         if (index != -1) {
             foundKeys.push([index, keyName])
         }
+    }
+
+    if (opType == TransactionType.Crediting && foundKeys.length == 0) {
+        return new TransactionDescription({ raw: raw, identifier: raw, referenceNumber: raw })
     }
 
     if (!foundKeys.length) {
@@ -81,14 +85,29 @@ export default function parseTransactionDescription(raw, opType) {
     }
     for (let i = 0; i < foundKeys.length - 1; i++) {
         const [keyIndex, keyName] = foundKeys[i]
-        const startIndex = keyIndex + keyName.length + sepLen
+
+        let startIndex;
+
+        if (keyName == keyNames.additionalInterestDate) {
+            startIndex = keyIndex + keyName.length
+        } else {
+            startIndex= keyIndex + keyName.length + sepLen
+        }
+
         const endIndex = foundKeys[i + 1][0]
         const value = raw.substring(startIndex, endIndex).trim()
         data.set(keyName, value)
     }
     if (foundKeys.length > 0) {
         const [lastKeyIndex, lastKeyName] = foundKeys[foundKeys.length - 1]
-        const lastStartIndex = lastKeyIndex + lastKeyName.length + sepLen
+        let lastStartIndex
+
+        if (lastKeyName == keyNames.additionalInterestDate) {
+            lastStartIndex = lastKeyIndex + lastKeyName.length
+        } else {
+            lastStartIndex = lastKeyIndex + lastKeyName.length + sepLen
+        }
+
         const lastValue = raw.substring(lastStartIndex).trim()
         data.set(lastKeyName, lastValue)
     }
@@ -117,6 +136,7 @@ export default function parseTransactionDescription(raw, opType) {
     let loanInterest = undefined
     let loanCapitalizedInterest = undefined
     let loanPenaltyInterest = undefined
+    let additionalInterestDate = undefined
 
     if (data.has(keyNames.title))
         title = data.get(keyNames.title)
@@ -129,6 +149,9 @@ export default function parseTransactionDescription(raw, opType) {
 
     if (data.has(keyNames.executionDate))
         executionDate = new Date(data.get(keyNames.executionDate))
+
+    if (data.has(keyNames.additionalInterestDate))
+        additionalInterestDate = new Date(data.get(keyNames.additionalInterestDate))
 
     // atm
     if (data.has(keyNames.atmName))
@@ -234,6 +257,7 @@ export default function parseTransactionDescription(raw, opType) {
         cardNumber: cardNumber,
         originalAmount: originalAmount,
         executionDate: executionDate,
+        additionalInterestDate: additionalInterestDate,
         atm: atm,
         identifier: identifier,
         referenceNumber: referenceNumber,
