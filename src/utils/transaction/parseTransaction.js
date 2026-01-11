@@ -23,6 +23,7 @@ export function parseTransaction(rawTransaction) {
         orderDate: orderDate,
         execDate: execDate,
         type: type,
+        rawType: rawTransaction.type,
         description: description,
         amount: amount,
         currency: amountCurrency,

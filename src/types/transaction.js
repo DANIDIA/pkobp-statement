@@ -14,6 +14,8 @@ export default class Transaction {
      * Date when the transaction was executed.
      * @property {TransactionType} type
      * Transaction type.
+     * @property {string} rawType
+     * Original raw type string.
      * @property {TransactionDescription} description
      * Full transaction description.
      * @property {number} amount
